@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import injectSheet from 'react-jss';
 import Button from './Button';
-import ACTION from '../constants/action';
+import STAGE from '../constants/stage';
 
 const styles = (theme) => ({
   widget: {
@@ -23,6 +23,7 @@ const styles = (theme) => ({
     borderRadius: '50%',
     objectFit: 'cover',
     marginRight: 10,
+    flexShrink: 0,
   },
   name: {
     margin: 0,
@@ -32,19 +33,25 @@ const styles = (theme) => ({
     marginTop: 10,
     justifyContent: 'space-between',
   },
+  back: {
+    marginRight: 'auto',
+  },
+  forward: {
+    marginLeft: 'auto',
+  },
 });
 
 class UserWidget extends Component {
   handleLeftClick = () => {
-    this.props.onClick(this.props.id, ACTION.BACK);
+    this.props.onClick(this.props.id, this.props.stage - 1);
   };
 
   handleRightClick = () => {
-    this.props.onClick(this.props.id, ACTION.FORWARD);
+    this.props.onClick(this.props.id, this.props.stage + 1);
   };
 
   render() {
-    const {classes, photo, firstName, lastName} = this.props;
+    const {classes, photo, firstName, lastName, stage} = this.props;
     return (
       <div className={classes.widget}>
         <div className={classes.info}>
@@ -52,8 +59,16 @@ class UserWidget extends Component {
           <h4 className={classes.name}>{`${firstName} ${lastName}`}</h4>
         </div>
         <div className={classes.actions}>
-          <Button onClick={this.handleLeftClick}>&larr;</Button>
-          <Button onClick={this.handleRightClick}>&rarr;</Button>
+          {stage !== STAGE.APPLIED && (
+            <Button className={classes.back} onClick={this.handleLeftClick}>
+              &larr;
+            </Button>
+          )}
+          {stage !== STAGE.HIRED && (
+            <Button className={classes.forward} onClick={this.handleRightClick}>
+              &rarr;
+            </Button>
+          )}
         </div>
       </div>
     );

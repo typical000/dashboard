@@ -1,5 +1,6 @@
 import React from 'react';
 import injectSheet from 'react-jss';
+import cn from 'classnames';
 
 const styles = (theme) => ({
   button: {
@@ -34,8 +35,8 @@ const styles = (theme) => ({
  * Very, very simplified version of button UI component.
  * It only respond on clicks and can render anything inside it.
  */
-const Button = ({classes, children, onClick}) => (
-  <button className={classes.button} onClick={onClick}>
+const Button = ({classes, className, children, onClick}) => (
+  <button className={cn(classes.button, className)} onClick={onClick}>
     {children}
   </button>
 );

@@ -38,6 +38,7 @@ const DashboardUserGrid = ({classes, onUserClick, ...props}) => (
               photo={user.picture.thumbnail}
               firstName={user.name.first}
               lastName={user.name.last}
+              stage={user.stage}
               onClick={onUserClick}
             />
           ))}

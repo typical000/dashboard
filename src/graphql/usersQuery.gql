@@ -1,6 +1,7 @@
 query UsersQuery {
   users @rest(type: "Users", path: "?nat=gb&results=5") {
     results @type(name: "User") {
+      stage @client
       name @type(name: "Name") {
         title
         first
