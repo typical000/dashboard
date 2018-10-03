@@ -221,6 +221,12 @@
 
         var _reactJss2 = _interopRequireDefault(_reactJss);
 
+        var _classnames = __webpack_require__(
+          /*! classnames */ './node_modules/classnames/index.js',
+        );
+
+        var _classnames2 = _interopRequireDefault(_classnames);
+
         function _interopRequireDefault(obj) {
           return obj && obj.__esModule ? obj : {default: obj};
         }
@@ -262,11 +268,15 @@
          */
         var Button = function Button(_ref) {
           var classes = _ref.classes,
+            className = _ref.className,
             children = _ref.children,
             onClick = _ref.onClick;
           return _react2.default.createElement(
             'button',
-            {className: classes.button, onClick: onClick},
+            {
+              className: (0, _classnames2.default)(classes.button, className),
+              onClick: onClick,
+            },
             children,
           );
         };
@@ -474,6 +484,7 @@
                       photo: user.picture.thumbnail,
                       firstName: user.name.first,
                       lastName: user.name.last,
+                      stage: user.stage,
                       onClick: onUserClick,
                     });
                   }),
@@ -752,11 +763,11 @@
 
         var _Button2 = _interopRequireDefault(_Button);
 
-        var _action = __webpack_require__(
-          /*! ../constants/action */ './src/constants/action.js',
+        var _stage = __webpack_require__(
+          /*! ../constants/stage */ './src/constants/stage.js',
         );
 
-        var _action2 = _interopRequireDefault(_action);
+        var _stage2 = _interopRequireDefault(_stage);
 
         function _interopRequireDefault(obj) {
           return obj && obj.__esModule ? obj : {default: obj};
@@ -783,6 +794,7 @@
               borderRadius: '50%',
               objectFit: 'cover',
               marginRight: 10,
+              flexShrink: 0,
             },
             name: {
               margin: 0,
@@ -791,6 +803,12 @@
               composes: '$info',
               marginTop: 10,
               justifyContent: 'space-between',
+            },
+            back: {
+              marginRight: 'auto',
+            },
+            forward: {
+              marginLeft: 'auto',
             },
           };
         };
@@ -826,10 +844,10 @@
               )),
               _this)),
               (_this.handleLeftClick = function() {
-                _this.props.onClick(_this.props.id, _action2.default.BACK);
+                _this.props.onClick(_this.props.id, _this.props.stage - 1);
               }),
               (_this.handleRightClick = function() {
-                _this.props.onClick(_this.props.id, _action2.default.FORWARD);
+                _this.props.onClick(_this.props.id, _this.props.stage + 1);
               }),
               _temp)),
               (0, _possibleConstructorReturn3.default)(_this, _ret)
@@ -844,7 +862,8 @@
                   classes = _props.classes,
                   photo = _props.photo,
                   firstName = _props.firstName,
-                  lastName = _props.lastName;
+                  lastName = _props.lastName,
+                  stage = _props.stage;
 
                 return _react2.default.createElement(
                   'div',
@@ -866,16 +885,24 @@
                   _react2.default.createElement(
                     'div',
                     {className: classes.actions},
-                    _react2.default.createElement(
-                      _Button2.default,
-                      {onClick: this.handleLeftClick},
-                      '\u2190',
-                    ),
-                    _react2.default.createElement(
-                      _Button2.default,
-                      {onClick: this.handleRightClick},
-                      '\u2192',
-                    ),
+                    stage !== _stage2.default.APPLIED &&
+                      _react2.default.createElement(
+                        _Button2.default,
+                        {
+                          className: classes.back,
+                          onClick: this.handleLeftClick,
+                        },
+                        '\u2190',
+                      ),
+                    stage !== _stage2.default.HIRED &&
+                      _react2.default.createElement(
+                        _Button2.default,
+                        {
+                          className: classes.forward,
+                          onClick: this.handleRightClick,
+                        },
+                        '\u2192',
+                      ),
                   ),
                 );
               },
@@ -889,10 +916,10 @@
         /***/
       },
 
-    /***/ './src/constants/action.js':
-      /*!*********************************!*\
-  !*** ./src/constants/action.js ***!
-  \*********************************/
+    /***/ './src/constants/stage.js':
+      /*!********************************!*\
+  !*** ./src/constants/stage.js ***!
+  \********************************/
       /*! no static exports found */
       /***/ function(module, exports, __webpack_require__) {
         'use strict';
@@ -901,12 +928,12 @@
           value: true,
         });
         /**
-         * Holds mapping between machine name of action
-         * that can be performed on user and user friendly name
+         * Current user stage (position on dashboard)
          */
         exports.default = {
-          BACK: -1,
-          FORWARD: 1,
+          APPLIED: 0,
+          INTERVIEWING: 1,
+          HIRED: 2,
         };
 
         /***/
@@ -1013,6 +1040,12 @@
           /*! react-apollo */ './node_modules/react-apollo/react-apollo.browser.umd.js',
         );
 
+        var _groupBy = __webpack_require__(
+          /*! lodash/groupBy */ './node_modules/lodash/groupBy.js',
+        );
+
+        var _groupBy2 = _interopRequireDefault(_groupBy);
+
         var _Loader = __webpack_require__(
           /*! ../components/Loader */ './src/components/Loader.js',
         );
@@ -1043,6 +1076,20 @@
 
         var _usersQuery2 = _interopRequireDefault(_usersQuery);
 
+        var _updateStageMutation = __webpack_require__(
+          /*! ../graphql/updateStageMutation.gql */ './src/graphql/updateStageMutation.gql',
+        );
+
+        var _updateStageMutation2 = _interopRequireDefault(
+          _updateStageMutation,
+        );
+
+        var _stage = __webpack_require__(
+          /*! ../constants/stage */ './src/constants/stage.js',
+        );
+
+        var _stage2 = _interopRequireDefault(_stage);
+
         function _interopRequireDefault(obj) {
           return obj && obj.__esModule ? obj : {default: obj};
         }
@@ -1065,19 +1112,36 @@
                     error: error,
                   });
 
-                var users = data && data.users && data.users.results;
+                /**
+                 * Sort users by 'stage' (only client data)
+                 * @see GraphQLProvider.js
+                 */
+                var userGroups = (0, _groupBy2.default)(
+                  data && data.users && data.users.results,
+                  function(user) {
+                    return user.stage;
+                  },
+                );
+
+                /**
+                 * @todo Add filters with with writing data into  apollo cache.
+                 */
+
                 return _react2.default.createElement(
                   _Loader2.default,
                   {active: loading},
                   _react2.default.createElement(_DashboardUserGrid2.default, {
-                    applied: users,
-                    interviewing: users,
-                    hired: users,
-                    onUserClick: function onUserClick(id, action) {
-                      console.log('> UPDATE');
-                      console.log(id);
-                      console.log(action);
-                      console.log(client);
+                    applied: userGroups[_stage2.default.APPLIED],
+                    interviewing: userGroups[_stage2.default.INTERVIEWING],
+                    hired: userGroups[_stage2.default.HIRED],
+                    onUserClick: function onUserClick(id, stage) {
+                      client.mutate({
+                        mutation: _updateStageMutation2.default,
+                        variables: {
+                          id: id,
+                          stage: stage,
+                        },
+                      });
                     },
                   }),
                 );
@@ -1103,6 +1167,12 @@
           value: true,
         });
 
+        var _extends2 = __webpack_require__(
+          /*! babel-runtime/helpers/extends */ './node_modules/babel-runtime/helpers/extends.js',
+        );
+
+        var _extends3 = _interopRequireDefault(_extends2);
+
         var _react = __webpack_require__(
           /*! react */ './node_modules/react/index.js',
         );
@@ -1121,6 +1191,14 @@
           /*! apollo-cache-inmemory */ './node_modules/apollo-cache-inmemory/lib/index.js',
         );
 
+        var _apolloLinkState = __webpack_require__(
+          /*! apollo-link-state */ './node_modules/apollo-link-state/lib/index.js',
+        );
+
+        var _apolloLink = __webpack_require__(
+          /*! apollo-link */ './node_modules/apollo-link/lib/index.js',
+        );
+
         var _apolloLinkRest = __webpack_require__(
           /*! apollo-link-rest */ './node_modules/apollo-link-rest/bundle.umd.js',
         );
@@ -1128,6 +1206,28 @@
         function _interopRequireDefault(obj) {
           return obj && obj.__esModule ? obj : {default: obj};
         }
+
+        /**
+         * Just for example how local stage is managed in react apollo
+         * In real app those resolvers must be moved into separated module.
+         */
+        var resolvers = {
+          defaults: {
+            stage: 0, // In this example we just set user as 'applied'
+          },
+          resolvers: {
+            Mutation: {
+              updateStage: function updateStage(_, _ref, _ref2) {
+                var id = _ref.id,
+                  stage = _ref.stage;
+                var cache = _ref2.cache;
+
+                cache.writeData({id: id, data: {stage: stage}});
+                return null;
+              },
+            },
+          },
+        };
 
         /**
          * Personally, I don't like Redux because we need to write too many code
@@ -1140,9 +1240,23 @@
           uri: 'https://randomuser.me/api/',
         });
 
+        var cache = new _apolloCacheInmemory.InMemoryCache({
+          dataIdFromObject: function dataIdFromObject(object) {
+            return (
+              // Additional operation to normalize cache
+              (object.login && object.login.uuid) || object.id || null
+            );
+          },
+        });
+
         var client = new _apolloClient.ApolloClient({
-          link: restLink,
-          cache: new _apolloCacheInmemory.InMemoryCache(),
+          link: _apolloLink.ApolloLink.from([
+            (0, _apolloLinkState.withClientState)(
+              (0, _extends3.default)({cache: cache}, resolvers),
+            ),
+            restLink,
+          ]),
+          cache: cache,
 
           /**
            * Because it is an experiment we use hardcoded value
@@ -1152,8 +1266,8 @@
           addTypeName: true,
         });
 
-        var GraphQLProvider = function GraphQLProvider(_ref) {
-          var children = _ref.children;
+        var GraphQLProvider = function GraphQLProvider(_ref3) {
+          var children = _ref3.children;
           return _react2.default.createElement(
             _reactApollo.ApolloProvider,
             {client: client},
@@ -1162,6 +1276,209 @@
         };
 
         exports.default = GraphQLProvider;
+
+        /***/
+      },
+
+    /***/ './src/graphql/updateStageMutation.gql':
+      /*!*********************************************!*\
+  !*** ./src/graphql/updateStageMutation.gql ***!
+  \*********************************************/
+      /*! no static exports found */
+      /***/ function(module, exports) {
+        var doc = {
+          kind: 'Document',
+          definitions: [
+            {
+              kind: 'OperationDefinition',
+              operation: 'mutation',
+              name: {kind: 'Name', value: 'UpdateStageMutation'},
+              variableDefinitions: [
+                {
+                  kind: 'VariableDefinition',
+                  variable: {
+                    kind: 'Variable',
+                    name: {kind: 'Name', value: 'id'},
+                  },
+                  type: {
+                    kind: 'NonNullType',
+                    type: {
+                      kind: 'NamedType',
+                      name: {kind: 'Name', value: 'Int'},
+                    },
+                  },
+                },
+                {
+                  kind: 'VariableDefinition',
+                  variable: {
+                    kind: 'Variable',
+                    name: {kind: 'Name', value: 'stage'},
+                  },
+                  type: {
+                    kind: 'NonNullType',
+                    type: {
+                      kind: 'NamedType',
+                      name: {kind: 'Name', value: 'Int'},
+                    },
+                  },
+                },
+              ],
+              directives: [],
+              selectionSet: {
+                kind: 'SelectionSet',
+                selections: [
+                  {
+                    kind: 'Field',
+                    name: {kind: 'Name', value: 'updateStage'},
+                    arguments: [
+                      {
+                        kind: 'Argument',
+                        name: {kind: 'Name', value: 'id'},
+                        value: {
+                          kind: 'Variable',
+                          name: {kind: 'Name', value: 'id'},
+                        },
+                      },
+                      {
+                        kind: 'Argument',
+                        name: {kind: 'Name', value: 'stage'},
+                        value: {
+                          kind: 'Variable',
+                          name: {kind: 'Name', value: 'stage'},
+                        },
+                      },
+                    ],
+                    directives: [
+                      {
+                        kind: 'Directive',
+                        name: {kind: 'Name', value: 'client'},
+                        arguments: [],
+                      },
+                    ],
+                  },
+                ],
+              },
+            },
+          ],
+          loc: {start: 0, end: 214},
+        };
+        doc.loc.source = {
+          body:
+            "mutation UpdateStageMutation($id: Int!, $stage: Int!) {\n  # We don't return nothing as response from mutation\n  # because direct cache changes will trigger UI changes\n  updateStage(id: $id, stage: $stage) @client\n}",
+          name: 'GraphQL request',
+          locationOffset: {line: 1, column: 1},
+        };
+
+        var names = {};
+        function unique(defs) {
+          return defs.filter(function(def) {
+            if (def.kind !== 'FragmentDefinition') return true;
+            var name = def.name.value;
+            if (names[name]) {
+              return false;
+            } else {
+              names[name] = true;
+              return true;
+            }
+          });
+        }
+
+        // Collect any fragment/type references from a node, adding them to the refs Set
+        function collectFragmentReferences(node, refs) {
+          if (node.kind === 'FragmentSpread') {
+            refs.add(node.name.value);
+          } else if (node.kind === 'VariableDefinition') {
+            var type = node.type;
+            if (type.kind === 'NamedType') {
+              refs.add(type.name.value);
+            }
+          }
+
+          if (node.selectionSet) {
+            node.selectionSet.selections.forEach(function(selection) {
+              collectFragmentReferences(selection, refs);
+            });
+          }
+
+          if (node.variableDefinitions) {
+            node.variableDefinitions.forEach(function(def) {
+              collectFragmentReferences(def, refs);
+            });
+          }
+
+          if (node.definitions) {
+            node.definitions.forEach(function(def) {
+              collectFragmentReferences(def, refs);
+            });
+          }
+        }
+
+        var definitionRefs = {};
+        (function extractReferences() {
+          doc.definitions.forEach(function(def) {
+            if (def.name) {
+              var refs = new Set();
+              collectFragmentReferences(def, refs);
+              definitionRefs[def.name.value] = refs;
+            }
+          });
+        })();
+
+        function findOperation(doc, name) {
+          for (var i = 0; i < doc.definitions.length; i++) {
+            var element = doc.definitions[i];
+            if (element.name && element.name.value == name) {
+              return element;
+            }
+          }
+        }
+
+        function oneQuery(doc, operationName) {
+          // Copy the DocumentNode, but clear out the definitions
+          var newDoc = {
+            kind: doc.kind,
+            definitions: [findOperation(doc, operationName)],
+          };
+          if (doc.hasOwnProperty('loc')) {
+            newDoc.loc = doc.loc;
+          }
+
+          // Now, for the operation we're running, find any fragments referenced by
+          // it or the fragments it references
+          var opRefs = definitionRefs[operationName] || new Set();
+          var allRefs = new Set();
+          var newRefs = new Set(opRefs);
+          while (newRefs.size > 0) {
+            var prevRefs = newRefs;
+            newRefs = new Set();
+
+            prevRefs.forEach(function(refName) {
+              if (!allRefs.has(refName)) {
+                allRefs.add(refName);
+                var childRefs = definitionRefs[refName] || new Set();
+                childRefs.forEach(function(childRef) {
+                  newRefs.add(childRef);
+                });
+              }
+            });
+          }
+
+          allRefs.forEach(function(refName) {
+            var op = findOperation(doc, refName);
+            if (op) {
+              newDoc.definitions.push(op);
+            }
+          });
+
+          return newDoc;
+        }
+
+        module.exports = doc;
+
+        module.exports['UpdateStageMutation'] = oneQuery(
+          doc,
+          'UpdateStageMutation',
+        );
 
         /***/
       },
@@ -1241,6 +1558,18 @@
                           selectionSet: {
                             kind: 'SelectionSet',
                             selections: [
+                              {
+                                kind: 'Field',
+                                name: {kind: 'Name', value: 'stage'},
+                                arguments: [],
+                                directives: [
+                                  {
+                                    kind: 'Directive',
+                                    name: {kind: 'Name', value: 'client'},
+                                    arguments: [],
+                                  },
+                                ],
+                              },
                               {
                                 kind: 'Field',
                                 name: {kind: 'Name', value: 'name'},
@@ -1362,11 +1691,11 @@
               },
             },
           ],
-          loc: {start: 0, end: 325},
+          loc: {start: 0, end: 345},
         };
         doc.loc.source = {
           body:
-            'query UsersQuery {\n  users @rest(type: "Users", path: "?nat=gb&results=5") {\n    results @type(name: "User") {\n      name @type(name: "Name") {\n        title\n        first\n        last\n      }\n      login @type(name: "Login") {\n        uuid\n      }\n      picture @type(name: "Picture") {\n        thumbnail\n      }\n    }\n  }\n}',
+            'query UsersQuery {\n  users @rest(type: "Users", path: "?nat=gb&results=5") {\n    results @type(name: "User") {\n      stage @client\n      name @type(name: "Name") {\n        title\n        first\n        last\n      }\n      login @type(name: "Login") {\n        uuid\n      }\n      picture @type(name: "Picture") {\n        thumbnail\n      }\n    }\n  }\n}',
           name: 'GraphQL request',
           locationOffset: {line: 1, column: 1},
         };
