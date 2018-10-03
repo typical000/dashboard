@@ -4,7 +4,8 @@ module.exports = {
   useTabs: false,
   singleQuote: true,
   trailingComma: 'all',
-  semi: false,
+  semi: true,
   bracketSpacing: false,
+  jsxBracketSameLine: false,
   arrowParens: 'always',
-}
+};
