@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 8080;
 // Add dev-server and hot reloading to webpack config.
 webpackConfig.entry.app.unshift(
   `webpack-dev-server/client?http://${HOST}:${PORT}/`,
-  'webpack/hot/dev-server',
+  'webpack/hot/dev-server'
 );
 
 webpackConfig.module.rules[0].use.options.presets.push('react-hmre');
@@ -16,7 +16,7 @@ webpackConfig.plugins = webpackConfig.plugins.concat([
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify('development'),
   }),
-  new webpack.HotModuleReplacementPlugin()
+  new webpack.HotModuleReplacementPlugin(),
 ]);
 
 const compiler = webpack(webpackConfig);
