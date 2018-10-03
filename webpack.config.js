@@ -1,7 +1,7 @@
-const webpack = require('webpack')
-const path = require('path')
+const webpack = require('webpack');
+const path = require('path');
 
-const dependencies = require('./package.json').dependencies
+const dependencies = require('./package.json').dependencies;
 
 /**
  * Use minified version of webpack configuration to make application "just work".
@@ -14,7 +14,7 @@ module.exports = {
     vendor: Object.keys(dependencies),
   },
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'docs'),
   },
   resolve: {
     extensions: ['.webpack.js', '.web.js', '.mjs', '.js', '.json'],
@@ -63,4 +63,4 @@ module.exports = {
       },
     },
   },
-}
+};
