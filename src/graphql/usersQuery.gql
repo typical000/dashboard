@@ -1,0 +1,17 @@
+query UsersQuery {
+  users @rest(type: "Users", path: "?nat=gb&results=5") {
+    results @type(name: "User") {
+      name @type(name: "Name") {
+        title
+        first
+        last
+      }
+      login @type(name: "Login") {
+        uuid
+      }
+      picture @type(name: "Picture") {
+        thumbnail
+      }
+    }
+  }
+}
