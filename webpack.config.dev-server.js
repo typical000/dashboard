@@ -16,7 +16,7 @@ webpackConfig.plugins = webpackConfig.plugins.concat([
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify('development'),
   }),
-  new webpack.HotModuleReplacementPlugin(),
+  new webpack.HotModuleReplacementPlugin()
 ]);
 
 const compiler = webpack(webpackConfig);
