@@ -1,0 +1,33 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "eslint-config-airbnb",
+    "plugin:flowtype/recommended",
+    "prettier"
+  ],
+  "plugins": [
+    "flowtype",
+    "babel"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "env": {
+    "jest": true
+  },
+  "rules": {
+    "no-void": "error",
+    "no-undefined": "error",
+    "react/jsx-filename-extension": [
+      "error",
+      {
+        "extensions": [".js"],
+      },
+    ],
+    "react/prop-types": "off",
+    "import/no-extraneous-dependencies": "off",
+  }
+}
