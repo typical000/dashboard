@@ -15,12 +15,18 @@ const Dashboard = () => (
       {({data, loading, error, client}) => {
         if (error) return <ErrorNotice error={error} />;
 
-        // Sort users by 'stage' (only client data)
-        // @see GraphQLProvider.js
+        /**
+         * Sort users by 'stage' (only client data)
+         * @see GraphQLProvider.js
+         */
         const userGroups = groupBy(
           data && data.users && data.users.results,
           (user) => user.stage,
         );
+
+        /**
+         * @todo Add filters with with writing data into  apollo cache.
+         */
 
         return (
           <Loader active={loading}>
