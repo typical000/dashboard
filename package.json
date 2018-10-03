@@ -7,9 +7,6 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development PORT=4000 node ./webpack.config.dev-server",
     "build": "cross-env NODE_ENV=development webpack --config ./webpack.config",
-    "clean": "rimraf 'dist/*'",
-    "all:dev": "npm run clean && npm run build:dev && npm run build:html:dev",
-    "all:prod": "npm run clean && npm run build:prod && npm run build:html:prod",
     "precommit": "lint-staged",
     "typecheck": "flow check --max-warnings=0",
     "lint": "eslint ./src",

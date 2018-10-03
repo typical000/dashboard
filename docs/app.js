@@ -197,6 +197,1291 @@
 })(
   /************************************************************************/
   /******/ {
+    /***/ './src/components/Button.js':
+      /*!**********************************!*\
+  !*** ./src/components/Button.js ***!
+  \**********************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict';
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        });
+
+        var _react = __webpack_require__(
+          /*! react */ './node_modules/react/index.js',
+        );
+
+        var _react2 = _interopRequireDefault(_react);
+
+        var _reactJss = __webpack_require__(
+          /*! react-jss */ './node_modules/react-jss/lib/index.js',
+        );
+
+        var _reactJss2 = _interopRequireDefault(_reactJss);
+
+        function _interopRequireDefault(obj) {
+          return obj && obj.__esModule ? obj : {default: obj};
+        }
+
+        var styles = function styles(theme) {
+          return {
+            button: {
+              display: 'flex',
+              position: 'relative',
+              padding: [0, 5],
+              fontFamily: theme.typography.fontFamily,
+              fontSize: theme.typography.fontSize,
+              fontWeight: 'bold',
+              lineHeight: '20px',
+              cursor: 'pointer',
+              userSelect: 'none',
+              appearance: 'none',
+              textAlign: 'center',
+              textDecoration: 'none',
+              textTransform: 'uppercase',
+              color: theme.button.color,
+              border: 'none',
+              borderRadius: theme.common.radius,
+              outline: 'none',
+              background: theme.button.background,
+              justifyContent: 'center',
+              alignItems: 'center',
+              boxShadow: theme.shadow.level1,
+              '&:hover, &:active, &:focus': {
+                background: theme.button.hoverBackground,
+              },
+            },
+          };
+        };
+
+        /**
+         * Very, very simplified version of button UI component.
+         * It only respond on clicks and can render anything inside it.
+         */
+        var Button = function Button(_ref) {
+          var classes = _ref.classes,
+            children = _ref.children,
+            onClick = _ref.onClick;
+          return _react2.default.createElement(
+            'button',
+            {className: classes.button, onClick: onClick},
+            children,
+          );
+        };
+
+        exports.default = (0, _reactJss2.default)(styles)(Button);
+
+        /***/
+      },
+
+    /***/ './src/components/DashboardLayout.js':
+      /*!*******************************************!*\
+  !*** ./src/components/DashboardLayout.js ***!
+  \*******************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict';
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        });
+
+        var _react = __webpack_require__(
+          /*! react */ './node_modules/react/index.js',
+        );
+
+        var _react2 = _interopRequireDefault(_react);
+
+        var _reactJss = __webpack_require__(
+          /*! react-jss */ './node_modules/react-jss/lib/index.js',
+        );
+
+        var _reactJss2 = _interopRequireDefault(_reactJss);
+
+        function _interopRequireDefault(obj) {
+          return obj && obj.__esModule ? obj : {default: obj};
+        }
+
+        var styles = function styles(theme) {
+          return {
+            container: {
+              maxWidth: 800,
+              width: '100%',
+              margin: [20, 'auto'],
+              padding: 20,
+              borderRadius: theme.common.radius,
+              background: theme.common.card,
+            },
+            content: {
+              position: 'relative',
+              minHeight: 200,
+            },
+            heading: {
+              display: 'flex',
+              alignItems: 'center',
+              paddingBottom: 10,
+              marginBottom: 20,
+              borderBottom: [2, 'solid', theme.common.border],
+            },
+            title: {
+              padding: [0, 10],
+              flexGrow: 1,
+              width: '33.3%',
+              textAlign: 'center',
+              /**
+               * Some interesting tip: 'jss-expand' was created by me.
+               * It allows to write code as you can see below.
+               * @see https://github.com/cssinjs/jss-expand
+               */
+              font: {
+                weight: 'bold',
+                size: 16,
+              },
+            },
+          };
+        };
+
+        /**
+         * Wrapper component for dashboard.
+         * We can decompose code, for e.g. move heading into separated components
+         * but we don't need to do this
+         */
+        var DashboardLayout = function DashboardLayout(_ref) {
+          var classes = _ref.classes,
+            children = _ref.children;
+          return _react2.default.createElement(
+            'div',
+            {className: classes.container},
+            _react2.default.createElement(
+              'div',
+              {className: classes.heading},
+              _react2.default.createElement(
+                'div',
+                {className: classes.title},
+                'Applied',
+              ),
+              _react2.default.createElement(
+                'div',
+                {className: classes.title},
+                'Interviewing',
+              ),
+              _react2.default.createElement(
+                'div',
+                {className: classes.title},
+                'Hired',
+              ),
+            ),
+            _react2.default.createElement(
+              'div',
+              {className: classes.content},
+              children,
+            ),
+          );
+        };
+
+        exports.default = (0, _reactJss2.default)(styles)(DashboardLayout);
+
+        /***/
+      },
+
+    /***/ './src/components/DashboardUserGrid.js':
+      /*!*********************************************!*\
+  !*** ./src/components/DashboardUserGrid.js ***!
+  \*********************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict';
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        });
+
+        var _objectWithoutProperties2 = __webpack_require__(
+          /*! babel-runtime/helpers/objectWithoutProperties */ './node_modules/babel-runtime/helpers/objectWithoutProperties.js',
+        );
+
+        var _objectWithoutProperties3 = _interopRequireDefault(
+          _objectWithoutProperties2,
+        );
+
+        var _react = __webpack_require__(
+          /*! react */ './node_modules/react/index.js',
+        );
+
+        var _react2 = _interopRequireDefault(_react);
+
+        var _reactJss = __webpack_require__(
+          /*! react-jss */ './node_modules/react-jss/lib/index.js',
+        );
+
+        var _reactJss2 = _interopRequireDefault(_reactJss);
+
+        var _UserWidget = __webpack_require__(
+          /*! ./UserWidget */ './src/components/UserWidget.js',
+        );
+
+        var _UserWidget2 = _interopRequireDefault(_UserWidget);
+
+        function _interopRequireDefault(obj) {
+          return obj && obj.__esModule ? obj : {default: obj};
+        }
+
+        var styles = {
+          container: {
+            display: 'flex',
+            alignItems: 'flex-start',
+          },
+          column: {
+            flex: {
+              grow: 1,
+              shrink: 0,
+            },
+            width: '33.3%',
+            padding: 10,
+            boxSizing: 'border-box',
+            '&:first-child': {
+              paddingLeft: 0,
+            },
+            '&:last-child': {
+              paddingRight: 0,
+            },
+          },
+        };
+
+        var CATEGORIES = ['applied', 'interviewing', 'hired'];
+
+        var DashboardUserGrid = function DashboardUserGrid(_ref) {
+          var classes = _ref.classes,
+            onUserClick = _ref.onUserClick,
+            props = (0, _objectWithoutProperties3.default)(_ref, [
+              'classes',
+              'onUserClick',
+            ]);
+          return _react2.default.createElement(
+            'div',
+            {className: classes.container},
+            CATEGORIES.map(function(category) {
+              return _react2.default.createElement(
+                'div',
+                {className: classes.column, key: category},
+                props[category] &&
+                  props[category].map(function(user) {
+                    return _react2.default.createElement(_UserWidget2.default, {
+                      key: user.login.uuid,
+                      id: user.login.uuid,
+                      photo: user.picture.thumbnail,
+                      firstName: user.name.first,
+                      lastName: user.name.last,
+                      onClick: onUserClick,
+                    });
+                  }),
+              );
+            }),
+          );
+        };
+
+        exports.default = (0, _reactJss2.default)(styles)(DashboardUserGrid);
+
+        /***/
+      },
+
+    /***/ './src/components/ErrorNotice.js':
+      /*!***************************************!*\
+  !*** ./src/components/ErrorNotice.js ***!
+  \***************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict';
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        });
+
+        var _react = __webpack_require__(
+          /*! react */ './node_modules/react/index.js',
+        );
+
+        var _react2 = _interopRequireDefault(_react);
+
+        var _reactJss = __webpack_require__(
+          /*! react-jss */ './node_modules/react-jss/lib/index.js',
+        );
+
+        var _reactJss2 = _interopRequireDefault(_reactJss);
+
+        var _polished = __webpack_require__(
+          /*! polished */ './node_modules/polished/dist/polished.es.js',
+        );
+
+        function _interopRequireDefault(obj) {
+          return obj && obj.__esModule ? obj : {default: obj};
+        }
+
+        var styles = function styles(theme) {
+          return {
+            container: {
+              padding: 20,
+              borderRadius: theme.common.radius,
+              textAlign: 'center',
+              border: [1, 'solid', theme.danger],
+              background: (0, _polished.lighten)(0.4, theme.danger),
+            },
+            title: {
+              color: theme.danger,
+              fontSize: 24,
+              margin: [0, 0, 20],
+            },
+            text: {
+              color: theme.danger,
+              fontSize: 14,
+              margin: [0, 0, 10],
+              '&:empty': {
+                display: 'none',
+              },
+            },
+          };
+        };
+
+        var ErrorNotice = function ErrorNotice(_ref) {
+          var classes = _ref.classes,
+            error = _ref.error;
+          return _react2.default.createElement(
+            'div',
+            {className: classes.container},
+            _react2.default.createElement(
+              'h2',
+              {className: classes.title},
+              'Something went wrong',
+            ),
+            _react2.default.createElement(
+              'p',
+              {className: classes.text},
+              'Please, try again later. Maybe this will help you:',
+            ),
+            _react2.default.createElement(
+              'p',
+              {className: classes.text},
+              error,
+            ),
+          );
+        };
+
+        exports.default = (0, _reactJss2.default)(styles)(ErrorNotice);
+
+        /***/
+      },
+
+    /***/ './src/components/Loader.js':
+      /*!**********************************!*\
+  !*** ./src/components/Loader.js ***!
+  \**********************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict';
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        });
+
+        var _react = __webpack_require__(
+          /*! react */ './node_modules/react/index.js',
+        );
+
+        var _react2 = _interopRequireDefault(_react);
+
+        var _classnames = __webpack_require__(
+          /*! classnames */ './node_modules/classnames/index.js',
+        );
+
+        var _classnames2 = _interopRequireDefault(_classnames);
+
+        var _cssFunctions = __webpack_require__(
+          /*! css-functions */ './node_modules/css-functions/lib/index.js',
+        );
+
+        var _reactJss = __webpack_require__(
+          /*! react-jss */ './node_modules/react-jss/lib/index.js',
+        );
+
+        var _reactJss2 = _interopRequireDefault(_reactJss);
+
+        function _interopRequireDefault(obj) {
+          return obj && obj.__esModule ? obj : {default: obj};
+        }
+
+        /**
+         * Just a loader UI component.
+         * In real app it must be placed in some separated
+         * package (or yarn workspace) with all other UI components.
+         */
+        var styles = function styles(theme) {
+          return {
+            loader: {
+              borderRadius: 'inherit',
+            },
+            active: {
+              '&::before, &::after': {
+                position: 'absolute',
+                content: '""',
+              },
+              '&::before': {
+                top: 0,
+                right: 0,
+                bottom: 0,
+                left: 0,
+                zIndex: 100,
+                opacity: 0.8,
+                background: theme.common.card,
+              },
+              '&::after': {
+                zIndex: 101,
+                width: 60,
+                height: 60,
+                top: '50%',
+                left: '50%',
+                marginTop: -30,
+                marginLeft: -30,
+                border: [4, 'solid', theme.loader.background],
+                borderTopColor: theme.loader.foreground,
+                borderRadius: '50%',
+                willChange: 'transform',
+                animation: {
+                  name: 'spin',
+                  duration: 1000,
+                  iterationCount: 'infinite',
+                  timingFunction: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+                },
+              },
+            },
+
+            '@keyframes spin': {
+              from: {
+                transform: (0, _cssFunctions.rotateZ)(0),
+              },
+              to: {
+                transform: (0, _cssFunctions.rotateZ)(360),
+              },
+            },
+          };
+        };
+
+        var Loader = function Loader(_ref) {
+          var children = _ref.children,
+            classes = _ref.classes,
+            className = _ref.className,
+            active = _ref.active;
+          return _react2.default.createElement(
+            'div',
+            {
+              className: (0, _classnames2.default)(
+                classes.loader,
+                active && classes.active,
+                className,
+              ),
+            },
+            children,
+          );
+        };
+
+        exports.default = (0, _reactJss2.default)(styles)(Loader);
+
+        /***/
+      },
+
+    /***/ './src/components/UserWidget.js':
+      /*!**************************************!*\
+  !*** ./src/components/UserWidget.js ***!
+  \**************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict';
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        });
+
+        var _getPrototypeOf = __webpack_require__(
+          /*! babel-runtime/core-js/object/get-prototype-of */ './node_modules/babel-runtime/core-js/object/get-prototype-of.js',
+        );
+
+        var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+        var _classCallCheck2 = __webpack_require__(
+          /*! babel-runtime/helpers/classCallCheck */ './node_modules/babel-runtime/helpers/classCallCheck.js',
+        );
+
+        var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+        var _createClass2 = __webpack_require__(
+          /*! babel-runtime/helpers/createClass */ './node_modules/babel-runtime/helpers/createClass.js',
+        );
+
+        var _createClass3 = _interopRequireDefault(_createClass2);
+
+        var _possibleConstructorReturn2 = __webpack_require__(
+          /*! babel-runtime/helpers/possibleConstructorReturn */ './node_modules/babel-runtime/helpers/possibleConstructorReturn.js',
+        );
+
+        var _possibleConstructorReturn3 = _interopRequireDefault(
+          _possibleConstructorReturn2,
+        );
+
+        var _inherits2 = __webpack_require__(
+          /*! babel-runtime/helpers/inherits */ './node_modules/babel-runtime/helpers/inherits.js',
+        );
+
+        var _inherits3 = _interopRequireDefault(_inherits2);
+
+        var _react = __webpack_require__(
+          /*! react */ './node_modules/react/index.js',
+        );
+
+        var _react2 = _interopRequireDefault(_react);
+
+        var _reactJss = __webpack_require__(
+          /*! react-jss */ './node_modules/react-jss/lib/index.js',
+        );
+
+        var _reactJss2 = _interopRequireDefault(_reactJss);
+
+        var _Button = __webpack_require__(
+          /*! ./Button */ './src/components/Button.js',
+        );
+
+        var _Button2 = _interopRequireDefault(_Button);
+
+        var _action = __webpack_require__(
+          /*! ../constants/action */ './src/constants/action.js',
+        );
+
+        var _action2 = _interopRequireDefault(_action);
+
+        function _interopRequireDefault(obj) {
+          return obj && obj.__esModule ? obj : {default: obj};
+        }
+
+        var styles = function styles(theme) {
+          return {
+            widget: {
+              background: theme.common.widget,
+              borderRadius: theme.common.radius,
+              padding: 20,
+              marginTop: 20,
+              '&:first-child': {
+                marginTop: 0,
+              },
+            },
+            info: {
+              display: 'flex',
+              alignItems: 'center',
+            },
+            photo: {
+              width: 40,
+              height: 40,
+              borderRadius: '50%',
+              objectFit: 'cover',
+              marginRight: 10,
+            },
+            name: {
+              margin: 0,
+            },
+            actions: {
+              composes: '$info',
+              marginTop: 10,
+              justifyContent: 'space-between',
+            },
+          };
+        };
+
+        var UserWidget = (function(_Component) {
+          (0, _inherits3.default)(UserWidget, _Component);
+
+          function UserWidget() {
+            var _ref;
+
+            var _temp, _this, _ret;
+
+            (0, _classCallCheck3.default)(this, UserWidget);
+
+            for (
+              var _len = arguments.length, args = Array(_len), _key = 0;
+              _key < _len;
+              _key++
+            ) {
+              args[_key] = arguments[_key];
+            }
+
+            return (
+              (_ret = ((_temp = ((_this = (0,
+              _possibleConstructorReturn3.default)(
+                this,
+                (_ref =
+                  UserWidget.__proto__ ||
+                  (0, _getPrototypeOf2.default)(UserWidget)).call.apply(
+                  _ref,
+                  [this].concat(args),
+                ),
+              )),
+              _this)),
+              (_this.handleLeftClick = function() {
+                _this.props.onClick(_this.props.id, _action2.default.BACK);
+              }),
+              (_this.handleRightClick = function() {
+                _this.props.onClick(_this.props.id, _action2.default.FORWARD);
+              }),
+              _temp)),
+              (0, _possibleConstructorReturn3.default)(_this, _ret)
+            );
+          }
+
+          (0, _createClass3.default)(UserWidget, [
+            {
+              key: 'render',
+              value: function render() {
+                var _props = this.props,
+                  classes = _props.classes,
+                  photo = _props.photo,
+                  firstName = _props.firstName,
+                  lastName = _props.lastName;
+
+                return _react2.default.createElement(
+                  'div',
+                  {className: classes.widget},
+                  _react2.default.createElement(
+                    'div',
+                    {className: classes.info},
+                    _react2.default.createElement('img', {
+                      className: classes.photo,
+                      src: photo,
+                      role: 'presentation',
+                    }),
+                    _react2.default.createElement(
+                      'h4',
+                      {className: classes.name},
+                      firstName + ' ' + lastName,
+                    ),
+                  ),
+                  _react2.default.createElement(
+                    'div',
+                    {className: classes.actions},
+                    _react2.default.createElement(
+                      _Button2.default,
+                      {onClick: this.handleLeftClick},
+                      '\u2190',
+                    ),
+                    _react2.default.createElement(
+                      _Button2.default,
+                      {onClick: this.handleRightClick},
+                      '\u2192',
+                    ),
+                  ),
+                );
+              },
+            },
+          ]);
+          return UserWidget;
+        })(_react.Component);
+
+        exports.default = (0, _reactJss2.default)(styles)(UserWidget);
+
+        /***/
+      },
+
+    /***/ './src/constants/action.js':
+      /*!*********************************!*\
+  !*** ./src/constants/action.js ***!
+  \*********************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict';
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        });
+        /**
+         * Holds mapping between machine name of action
+         * that can be performed on user and user friendly name
+         */
+        exports.default = {
+          BACK: -1,
+          FORWARD: 1,
+        };
+
+        /***/
+      },
+
+    /***/ './src/containers/App.js':
+      /*!*******************************!*\
+  !*** ./src/containers/App.js ***!
+  \*******************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict';
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        });
+
+        var _react = __webpack_require__(
+          /*! react */ './node_modules/react/index.js',
+        );
+
+        var _react2 = _interopRequireDefault(_react);
+
+        var _reactJss = __webpack_require__(
+          /*! react-jss */ './node_modules/react-jss/lib/index.js',
+        );
+
+        var _GraphQLProvider = __webpack_require__(
+          /*! ./GraphQLProvider */ './src/containers/GraphQLProvider.js',
+        );
+
+        var _GraphQLProvider2 = _interopRequireDefault(_GraphQLProvider);
+
+        var _NormalizeCss = __webpack_require__(
+          /*! ../utils/NormalizeCss */ './src/utils/NormalizeCss.js',
+        );
+
+        var _NormalizeCss2 = _interopRequireDefault(_NormalizeCss);
+
+        var _theme = __webpack_require__(
+          /*! ../theme */ './src/theme/index.js',
+        );
+
+        var _theme2 = _interopRequireDefault(_theme);
+
+        var _Dashboard = __webpack_require__(
+          /*! ./Dashboard */ './src/containers/Dashboard.js',
+        );
+
+        var _Dashboard2 = _interopRequireDefault(_Dashboard);
+
+        function _interopRequireDefault(obj) {
+          return obj && obj.__esModule ? obj : {default: obj};
+        }
+
+        /**
+         * Main application setup. All providers and other global
+         * stuff goes here.
+         */
+        var App = function App() {
+          return _react2.default.createElement(
+            _GraphQLProvider2.default,
+            null,
+            _react2.default.createElement(
+              _reactJss.ThemeProvider,
+              {theme: _theme2.default},
+              _react2.default.createElement(
+                _reactJss.JssProvider,
+                null,
+                _react2.default.createElement(
+                  _NormalizeCss2.default,
+                  null,
+                  _react2.default.createElement(_Dashboard2.default, null),
+                ),
+              ),
+            ),
+          );
+        };
+
+        exports.default = App;
+
+        /***/
+      },
+
+    /***/ './src/containers/Dashboard.js':
+      /*!*************************************!*\
+  !*** ./src/containers/Dashboard.js ***!
+  \*************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict';
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        });
+
+        var _react = __webpack_require__(
+          /*! react */ './node_modules/react/index.js',
+        );
+
+        var _react2 = _interopRequireDefault(_react);
+
+        var _reactApollo = __webpack_require__(
+          /*! react-apollo */ './node_modules/react-apollo/react-apollo.browser.umd.js',
+        );
+
+        var _Loader = __webpack_require__(
+          /*! ../components/Loader */ './src/components/Loader.js',
+        );
+
+        var _Loader2 = _interopRequireDefault(_Loader);
+
+        var _DashboardUserGrid = __webpack_require__(
+          /*! ../components/DashboardUserGrid */ './src/components/DashboardUserGrid.js',
+        );
+
+        var _DashboardUserGrid2 = _interopRequireDefault(_DashboardUserGrid);
+
+        var _ErrorNotice = __webpack_require__(
+          /*! ../components/ErrorNotice */ './src/components/ErrorNotice.js',
+        );
+
+        var _ErrorNotice2 = _interopRequireDefault(_ErrorNotice);
+
+        var _DashboardLayout = __webpack_require__(
+          /*! ../components/DashboardLayout */ './src/components/DashboardLayout.js',
+        );
+
+        var _DashboardLayout2 = _interopRequireDefault(_DashboardLayout);
+
+        var _usersQuery = __webpack_require__(
+          /*! ../graphql/usersQuery.gql */ './src/graphql/usersQuery.gql',
+        );
+
+        var _usersQuery2 = _interopRequireDefault(_usersQuery);
+
+        function _interopRequireDefault(obj) {
+          return obj && obj.__esModule ? obj : {default: obj};
+        }
+
+        var Dashboard = function Dashboard() {
+          return _react2.default.createElement(
+            _DashboardLayout2.default,
+            null,
+            _react2.default.createElement(
+              _reactApollo.Query,
+              {query: _usersQuery2.default},
+              function(_ref) {
+                var data = _ref.data,
+                  loading = _ref.loading,
+                  error = _ref.error,
+                  client = _ref.client;
+
+                if (error)
+                  return _react2.default.createElement(_ErrorNotice2.default, {
+                    error: error,
+                  });
+
+                var users = data && data.users && data.users.results;
+                return _react2.default.createElement(
+                  _Loader2.default,
+                  {active: loading},
+                  _react2.default.createElement(_DashboardUserGrid2.default, {
+                    applied: users,
+                    interviewing: users,
+                    hired: users,
+                    onUserClick: function onUserClick(id, action) {
+                      console.log('> UPDATE');
+                      console.log(id);
+                      console.log(action);
+                      console.log(client);
+                    },
+                  }),
+                );
+              },
+            ),
+          );
+        };
+
+        exports.default = Dashboard;
+
+        /***/
+      },
+
+    /***/ './src/containers/GraphQLProvider.js':
+      /*!*******************************************!*\
+  !*** ./src/containers/GraphQLProvider.js ***!
+  \*******************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict';
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        });
+
+        var _react = __webpack_require__(
+          /*! react */ './node_modules/react/index.js',
+        );
+
+        var _react2 = _interopRequireDefault(_react);
+
+        var _reactApollo = __webpack_require__(
+          /*! react-apollo */ './node_modules/react-apollo/react-apollo.browser.umd.js',
+        );
+
+        var _apolloClient = __webpack_require__(
+          /*! apollo-client */ './node_modules/apollo-client/index.js',
+        );
+
+        var _apolloCacheInmemory = __webpack_require__(
+          /*! apollo-cache-inmemory */ './node_modules/apollo-cache-inmemory/lib/index.js',
+        );
+
+        var _apolloLinkRest = __webpack_require__(
+          /*! apollo-link-rest */ './node_modules/apollo-link-rest/bundle.umd.js',
+        );
+
+        function _interopRequireDefault(obj) {
+          return obj && obj.__esModule ? obj : {default: obj};
+        }
+
+        /**
+         * Personally, I don't like Redux because we need to write too many code
+         * (resolvers, actions, action creators, mapping state to props) for solving simple tasks
+         *
+         * So in this case to experiment how react-apollo works with rest links.
+         * It's, anyway, a good experience.
+         */
+        var restLink = new _apolloLinkRest.RestLink({
+          uri: 'https://randomuser.me/api/',
+        });
+
+        var client = new _apolloClient.ApolloClient({
+          link: restLink,
+          cache: new _apolloCacheInmemory.InMemoryCache(),
+
+          /**
+           * Because it is an experiment we use hardcoded value
+           * In working example we'll use 'process.env'
+           */
+          connectToDevTools: true,
+          addTypeName: true,
+        });
+
+        var GraphQLProvider = function GraphQLProvider(_ref) {
+          var children = _ref.children;
+          return _react2.default.createElement(
+            _reactApollo.ApolloProvider,
+            {client: client},
+            children,
+          );
+        };
+
+        exports.default = GraphQLProvider;
+
+        /***/
+      },
+
+    /***/ './src/graphql/usersQuery.gql':
+      /*!************************************!*\
+  !*** ./src/graphql/usersQuery.gql ***!
+  \************************************/
+      /*! no static exports found */
+      /***/ function(module, exports) {
+        var doc = {
+          kind: 'Document',
+          definitions: [
+            {
+              kind: 'OperationDefinition',
+              operation: 'query',
+              name: {kind: 'Name', value: 'UsersQuery'},
+              variableDefinitions: [],
+              directives: [],
+              selectionSet: {
+                kind: 'SelectionSet',
+                selections: [
+                  {
+                    kind: 'Field',
+                    name: {kind: 'Name', value: 'users'},
+                    arguments: [],
+                    directives: [
+                      {
+                        kind: 'Directive',
+                        name: {kind: 'Name', value: 'rest'},
+                        arguments: [
+                          {
+                            kind: 'Argument',
+                            name: {kind: 'Name', value: 'type'},
+                            value: {
+                              kind: 'StringValue',
+                              value: 'Users',
+                              block: false,
+                            },
+                          },
+                          {
+                            kind: 'Argument',
+                            name: {kind: 'Name', value: 'path'},
+                            value: {
+                              kind: 'StringValue',
+                              value: '?nat=gb&results=5',
+                              block: false,
+                            },
+                          },
+                        ],
+                      },
+                    ],
+                    selectionSet: {
+                      kind: 'SelectionSet',
+                      selections: [
+                        {
+                          kind: 'Field',
+                          name: {kind: 'Name', value: 'results'},
+                          arguments: [],
+                          directives: [
+                            {
+                              kind: 'Directive',
+                              name: {kind: 'Name', value: 'type'},
+                              arguments: [
+                                {
+                                  kind: 'Argument',
+                                  name: {kind: 'Name', value: 'name'},
+                                  value: {
+                                    kind: 'StringValue',
+                                    value: 'User',
+                                    block: false,
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          selectionSet: {
+                            kind: 'SelectionSet',
+                            selections: [
+                              {
+                                kind: 'Field',
+                                name: {kind: 'Name', value: 'name'},
+                                arguments: [],
+                                directives: [
+                                  {
+                                    kind: 'Directive',
+                                    name: {kind: 'Name', value: 'type'},
+                                    arguments: [
+                                      {
+                                        kind: 'Argument',
+                                        name: {kind: 'Name', value: 'name'},
+                                        value: {
+                                          kind: 'StringValue',
+                                          value: 'Name',
+                                          block: false,
+                                        },
+                                      },
+                                    ],
+                                  },
+                                ],
+                                selectionSet: {
+                                  kind: 'SelectionSet',
+                                  selections: [
+                                    {
+                                      kind: 'Field',
+                                      name: {kind: 'Name', value: 'title'},
+                                      arguments: [],
+                                      directives: [],
+                                    },
+                                    {
+                                      kind: 'Field',
+                                      name: {kind: 'Name', value: 'first'},
+                                      arguments: [],
+                                      directives: [],
+                                    },
+                                    {
+                                      kind: 'Field',
+                                      name: {kind: 'Name', value: 'last'},
+                                      arguments: [],
+                                      directives: [],
+                                    },
+                                  ],
+                                },
+                              },
+                              {
+                                kind: 'Field',
+                                name: {kind: 'Name', value: 'login'},
+                                arguments: [],
+                                directives: [
+                                  {
+                                    kind: 'Directive',
+                                    name: {kind: 'Name', value: 'type'},
+                                    arguments: [
+                                      {
+                                        kind: 'Argument',
+                                        name: {kind: 'Name', value: 'name'},
+                                        value: {
+                                          kind: 'StringValue',
+                                          value: 'Login',
+                                          block: false,
+                                        },
+                                      },
+                                    ],
+                                  },
+                                ],
+                                selectionSet: {
+                                  kind: 'SelectionSet',
+                                  selections: [
+                                    {
+                                      kind: 'Field',
+                                      name: {kind: 'Name', value: 'uuid'},
+                                      arguments: [],
+                                      directives: [],
+                                    },
+                                  ],
+                                },
+                              },
+                              {
+                                kind: 'Field',
+                                name: {kind: 'Name', value: 'picture'},
+                                arguments: [],
+                                directives: [
+                                  {
+                                    kind: 'Directive',
+                                    name: {kind: 'Name', value: 'type'},
+                                    arguments: [
+                                      {
+                                        kind: 'Argument',
+                                        name: {kind: 'Name', value: 'name'},
+                                        value: {
+                                          kind: 'StringValue',
+                                          value: 'Picture',
+                                          block: false,
+                                        },
+                                      },
+                                    ],
+                                  },
+                                ],
+                                selectionSet: {
+                                  kind: 'SelectionSet',
+                                  selections: [
+                                    {
+                                      kind: 'Field',
+                                      name: {kind: 'Name', value: 'thumbnail'},
+                                      arguments: [],
+                                      directives: [],
+                                    },
+                                  ],
+                                },
+                              },
+                            ],
+                          },
+                        },
+                      ],
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+          loc: {start: 0, end: 325},
+        };
+        doc.loc.source = {
+          body:
+            'query UsersQuery {\n  users @rest(type: "Users", path: "?nat=gb&results=5") {\n    results @type(name: "User") {\n      name @type(name: "Name") {\n        title\n        first\n        last\n      }\n      login @type(name: "Login") {\n        uuid\n      }\n      picture @type(name: "Picture") {\n        thumbnail\n      }\n    }\n  }\n}',
+          name: 'GraphQL request',
+          locationOffset: {line: 1, column: 1},
+        };
+
+        var names = {};
+        function unique(defs) {
+          return defs.filter(function(def) {
+            if (def.kind !== 'FragmentDefinition') return true;
+            var name = def.name.value;
+            if (names[name]) {
+              return false;
+            } else {
+              names[name] = true;
+              return true;
+            }
+          });
+        }
+
+        // Collect any fragment/type references from a node, adding them to the refs Set
+        function collectFragmentReferences(node, refs) {
+          if (node.kind === 'FragmentSpread') {
+            refs.add(node.name.value);
+          } else if (node.kind === 'VariableDefinition') {
+            var type = node.type;
+            if (type.kind === 'NamedType') {
+              refs.add(type.name.value);
+            }
+          }
+
+          if (node.selectionSet) {
+            node.selectionSet.selections.forEach(function(selection) {
+              collectFragmentReferences(selection, refs);
+            });
+          }
+
+          if (node.variableDefinitions) {
+            node.variableDefinitions.forEach(function(def) {
+              collectFragmentReferences(def, refs);
+            });
+          }
+
+          if (node.definitions) {
+            node.definitions.forEach(function(def) {
+              collectFragmentReferences(def, refs);
+            });
+          }
+        }
+
+        var definitionRefs = {};
+        (function extractReferences() {
+          doc.definitions.forEach(function(def) {
+            if (def.name) {
+              var refs = new Set();
+              collectFragmentReferences(def, refs);
+              definitionRefs[def.name.value] = refs;
+            }
+          });
+        })();
+
+        function findOperation(doc, name) {
+          for (var i = 0; i < doc.definitions.length; i++) {
+            var element = doc.definitions[i];
+            if (element.name && element.name.value == name) {
+              return element;
+            }
+          }
+        }
+
+        function oneQuery(doc, operationName) {
+          // Copy the DocumentNode, but clear out the definitions
+          var newDoc = {
+            kind: doc.kind,
+            definitions: [findOperation(doc, operationName)],
+          };
+          if (doc.hasOwnProperty('loc')) {
+            newDoc.loc = doc.loc;
+          }
+
+          // Now, for the operation we're running, find any fragments referenced by
+          // it or the fragments it references
+          var opRefs = definitionRefs[operationName] || new Set();
+          var allRefs = new Set();
+          var newRefs = new Set(opRefs);
+          while (newRefs.size > 0) {
+            var prevRefs = newRefs;
+            newRefs = new Set();
+
+            prevRefs.forEach(function(refName) {
+              if (!allRefs.has(refName)) {
+                allRefs.add(refName);
+                var childRefs = definitionRefs[refName] || new Set();
+                childRefs.forEach(function(childRef) {
+                  newRefs.add(childRef);
+                });
+              }
+            });
+          }
+
+          allRefs.forEach(function(refName) {
+            var op = findOperation(doc, refName);
+            if (op) {
+              newDoc.definitions.push(op);
+            }
+          });
+
+          return newDoc;
+        }
+
+        module.exports = doc;
+
+        module.exports['UsersQuery'] = oneQuery(doc, 'UsersQuery');
+
+        /***/
+      },
+
     /***/ './src/index.js':
       /*!**********************!*\
   !*** ./src/index.js ***!
@@ -215,14 +1500,138 @@
           /*! react-dom */ './node_modules/react-dom/index.js',
         );
 
+        var _App = __webpack_require__(
+          /*! ./containers/App */ './src/containers/App.js',
+        );
+
+        var _App2 = _interopRequireDefault(_App);
+
         function _interopRequireDefault(obj) {
           return obj && obj.__esModule ? obj : {default: obj};
         }
 
+        /**
+         * Maybe, if someone add SSR to this app we can
+         * add 'hydration' of DOM and other 'initialization' stuff
+         */
         (0, _reactDom.render)(
-          _react2.default.createElement('div', null, '123'),
-          document.getElementByid('app'),
+          _react2.default.createElement(_App2.default, null),
+          document.getElementById('app'),
+        ); /* global document */
+
+        /***/
+      },
+
+    /***/ './src/theme/index.js':
+      /*!****************************!*\
+  !*** ./src/theme/index.js ***!
+  \****************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict';
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        });
+
+        var _polished = __webpack_require__(
+          /*! polished */ './node_modules/polished/dist/polished.es.js',
         );
+
+        /**
+         * This module holds essential theme colors to create
+         * unique branding style for my application.
+         *
+         * If we need, we can create multi-theme application and switch
+         * theme dynamically without any server bulding. Just using JSS and React
+         */
+        var base = {
+          brand: '#ff5959',
+          light: '#fff',
+          dark: '#000',
+        };
+
+        exports.default = {
+          brand: base.brand,
+          success: '#69b32d',
+          danger: '#f1462f',
+          typography: {
+            fontFamily: 'Helvetica, Arial, sans-serif',
+            fontSize: 14,
+            lineHeight: 1.2,
+          },
+          common: {
+            card: (0, _polished.darken)(0.04, base.light),
+            widget: base.light,
+            border: (0, _polished.darken)(0.1, base.light),
+            radius: 3,
+          },
+          icon: {
+            default: (0, _polished.transparentize)(0.5, base.dark),
+            inverse: (0, _polished.transparentize)(0.1, base.light),
+          },
+          loader: {
+            foreground: (0, _polished.transparentize)(0.4, base.dark),
+            background: (0, _polished.transparentize)(0.8, base.dark),
+          },
+          text: {
+            default: (0, _polished.transparentize)(0.15, base.dark),
+            highlight: base.brand,
+            muted: (0, _polished.transparentize)(0.5, base.dark),
+          },
+          shadow: {
+            level1: '0 0 2px 0 rgba(0,0,0,0.10), 0 2px 2px 0 rgba(0,0,0,0.20)',
+            level2: '0 0 4px 0 rgba(0,0,0,0.10), 0 4px 4px 0 rgba(0,0,0,0.20)',
+            level3: '0 0 8px 0 rgba(0,0,0,0.10), 0 8px 8px 0 rgba(0,0,0,0.20)',
+            level4:
+              '0 0 16px 0 rgba(0,0,0,0.10), 0 16px 16px 0 rgba(0,0,0,0.20)',
+            level5:
+              '0 0 24px 0 rgba(0,0,0,0.10), 0 24px 24px 0 rgba(0,0,0,0.20)',
+          },
+          button: {
+            color: (0, _polished.transparentize)(0.3, base.dark),
+            background: (0, _polished.darken)(0.08, base.light),
+            hoverBackground: (0, _polished.darken)(0.12, base.light),
+            icon: (0, _polished.transparentize)(0.5, base.dark),
+          },
+        };
+
+        /***/
+      },
+
+    /***/ './src/utils/NormalizeCss.js':
+      /*!***********************************!*\
+  !*** ./src/utils/NormalizeCss.js ***!
+  \***********************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict';
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        });
+
+        var _normalizeJss = __webpack_require__(
+          /*! normalize-jss */ './node_modules/normalize-jss/index.js',
+        );
+
+        var _normalizeJss2 = _interopRequireDefault(_normalizeJss);
+
+        var _reactJss = __webpack_require__(
+          /*! react-jss */ './node_modules/react-jss/lib/index.js',
+        );
+
+        var _reactJss2 = _interopRequireDefault(_reactJss);
+
+        function _interopRequireDefault(obj) {
+          return obj && obj.__esModule ? obj : {default: obj};
+        }
+
+        /**
+         * React-wrapper around plain JSS normalizing styles.
+         * For info - 'normalize-jss' was created by me.
+         */
+        exports.default = (0, _reactJss2.default)(_normalizeJss2.default)();
 
         /***/
       },
