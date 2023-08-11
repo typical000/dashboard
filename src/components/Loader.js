@@ -1,14 +1,14 @@
 import React from 'react';
 import cn from 'classnames';
 import {rotateZ} from 'css-functions';
-import injectSheet from 'react-jss';
+import {createUseStyles} from 'react-jss';
 
 /**
  * Just a loader UI component.
  * In real app it must be placed in some separated
  * package (or yarn workspace) with all other UI components.
  */
-const styles = (theme) => ({
+const useStyles = createUseStyles((theme) => ({
   loader: {
     borderRadius: 'inherit',
   },
@@ -55,12 +55,15 @@ const styles = (theme) => ({
       transform: rotateZ(360),
     },
   },
-});
+}));
 
-const Loader = ({children, classes, className, active}) => (
-  <div className={cn(classes.loader, active && classes.active, className)}>
-    {children}
-  </div>
-);
+const Loader = ({children, className, active}) => {
+  const css = useStyles();
+  return (
+    <div className={cn(css.loader, active && css.active, className)}>
+      {children}
+    </div>
+  );
+};
 
-export default injectSheet(styles)(Loader);
+export default Loader;

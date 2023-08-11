@@ -1,5 +1,0 @@
-mutation UpdateStageMutation($id: Int!, $stage: Int!) {
-  # We don't return nothing as response from mutation
-  # because direct cache changes will trigger UI changes
-  updateStage(id: $id, stage: $stage) @client
-}

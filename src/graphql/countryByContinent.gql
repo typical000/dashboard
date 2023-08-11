@@ -1,0 +1,13 @@
+#import "./fragments/country.gql"
+
+query CountryByContinentQuery ($code: ID!) {
+  continent(code: $code) {
+    code
+    name
+    countries {
+      # GraphQL Framgents
+      # https://www.apollographql.com/docs/react/data/fragments/
+      ...Country
+    }
+  }
+}

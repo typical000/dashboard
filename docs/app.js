@@ -12,7 +12,10 @@
       resolves = [];
     /******/ for (; i < chunkIds.length; i++) {
       /******/ chunkId = chunkIds[i];
-      /******/ if (installedChunks[chunkId]) {
+      /******/ if (
+        Object.prototype.hasOwnProperty.call(installedChunks, chunkId) &&
+        installedChunks[chunkId]
+      ) {
         /******/ resolves.push(installedChunks[chunkId][0]);
         /******/
       }
@@ -62,6 +65,7 @@
       }
       /******/
     }
+    /******/
     /******/ return result;
     /******/
   } // The module cache
@@ -197,307 +201,6 @@
 })(
   /************************************************************************/
   /******/ {
-    /***/ './src/components/Button.js':
-      /*!**********************************!*\
-  !*** ./src/components/Button.js ***!
-  \**********************************/
-      /*! no static exports found */
-      /***/ function(module, exports, __webpack_require__) {
-        'use strict';
-
-        Object.defineProperty(exports, '__esModule', {
-          value: true,
-        });
-
-        var _react = __webpack_require__(
-          /*! react */ './node_modules/react/index.js',
-        );
-
-        var _react2 = _interopRequireDefault(_react);
-
-        var _reactJss = __webpack_require__(
-          /*! react-jss */ './node_modules/react-jss/lib/index.js',
-        );
-
-        var _reactJss2 = _interopRequireDefault(_reactJss);
-
-        var _classnames = __webpack_require__(
-          /*! classnames */ './node_modules/classnames/index.js',
-        );
-
-        var _classnames2 = _interopRequireDefault(_classnames);
-
-        function _interopRequireDefault(obj) {
-          return obj && obj.__esModule ? obj : {default: obj};
-        }
-
-        var styles = function styles(theme) {
-          return {
-            button: {
-              display: 'flex',
-              position: 'relative',
-              padding: [0, 5],
-              fontFamily: theme.typography.fontFamily,
-              fontSize: theme.typography.fontSize,
-              fontWeight: 'bold',
-              lineHeight: '20px',
-              cursor: 'pointer',
-              userSelect: 'none',
-              appearance: 'none',
-              textAlign: 'center',
-              textDecoration: 'none',
-              textTransform: 'uppercase',
-              color: theme.button.color,
-              border: 'none',
-              borderRadius: theme.common.radius,
-              outline: 'none',
-              background: theme.button.background,
-              justifyContent: 'center',
-              alignItems: 'center',
-              boxShadow: theme.shadow.level1,
-              '&:hover, &:active, &:focus': {
-                background: theme.button.hoverBackground,
-              },
-            },
-          };
-        };
-
-        /**
-         * Very, very simplified version of button UI component.
-         * It only respond on clicks and can render anything inside it.
-         */
-        var Button = function Button(_ref) {
-          var classes = _ref.classes,
-            className = _ref.className,
-            children = _ref.children,
-            onClick = _ref.onClick;
-          return _react2.default.createElement(
-            'button',
-            {
-              className: (0, _classnames2.default)(classes.button, className),
-              onClick: onClick,
-            },
-            children,
-          );
-        };
-
-        exports.default = (0, _reactJss2.default)(styles)(Button);
-
-        /***/
-      },
-
-    /***/ './src/components/DashboardLayout.js':
-      /*!*******************************************!*\
-  !*** ./src/components/DashboardLayout.js ***!
-  \*******************************************/
-      /*! no static exports found */
-      /***/ function(module, exports, __webpack_require__) {
-        'use strict';
-
-        Object.defineProperty(exports, '__esModule', {
-          value: true,
-        });
-
-        var _react = __webpack_require__(
-          /*! react */ './node_modules/react/index.js',
-        );
-
-        var _react2 = _interopRequireDefault(_react);
-
-        var _reactJss = __webpack_require__(
-          /*! react-jss */ './node_modules/react-jss/lib/index.js',
-        );
-
-        var _reactJss2 = _interopRequireDefault(_reactJss);
-
-        function _interopRequireDefault(obj) {
-          return obj && obj.__esModule ? obj : {default: obj};
-        }
-
-        var styles = function styles(theme) {
-          return {
-            container: {
-              maxWidth: 800,
-              width: '100%',
-              margin: [20, 'auto'],
-              padding: 20,
-              borderRadius: theme.common.radius,
-              background: theme.common.card,
-            },
-            content: {
-              position: 'relative',
-              minHeight: 200,
-            },
-            heading: {
-              display: 'flex',
-              alignItems: 'center',
-              paddingBottom: 10,
-              marginBottom: 20,
-              borderBottom: [2, 'solid', theme.common.border],
-            },
-            title: {
-              padding: [0, 10],
-              flexGrow: 1,
-              width: '33.3%',
-              textAlign: 'center',
-              /**
-               * Some interesting tip: 'jss-expand' was created by me.
-               * It allows to write code as you can see below.
-               * @see https://github.com/cssinjs/jss-expand
-               */
-              font: {
-                weight: 'bold',
-                size: 16,
-              },
-            },
-          };
-        };
-
-        /**
-         * Wrapper component for dashboard.
-         * We can decompose code, for e.g. move heading into separated components
-         * but we don't need to do this
-         */
-        var DashboardLayout = function DashboardLayout(_ref) {
-          var classes = _ref.classes,
-            children = _ref.children;
-          return _react2.default.createElement(
-            'div',
-            {className: classes.container},
-            _react2.default.createElement(
-              'div',
-              {className: classes.heading},
-              _react2.default.createElement(
-                'div',
-                {className: classes.title},
-                'Applied',
-              ),
-              _react2.default.createElement(
-                'div',
-                {className: classes.title},
-                'Interviewing',
-              ),
-              _react2.default.createElement(
-                'div',
-                {className: classes.title},
-                'Hired',
-              ),
-            ),
-            _react2.default.createElement(
-              'div',
-              {className: classes.content},
-              children,
-            ),
-          );
-        };
-
-        exports.default = (0, _reactJss2.default)(styles)(DashboardLayout);
-
-        /***/
-      },
-
-    /***/ './src/components/DashboardUserGrid.js':
-      /*!*********************************************!*\
-  !*** ./src/components/DashboardUserGrid.js ***!
-  \*********************************************/
-      /*! no static exports found */
-      /***/ function(module, exports, __webpack_require__) {
-        'use strict';
-
-        Object.defineProperty(exports, '__esModule', {
-          value: true,
-        });
-
-        var _objectWithoutProperties2 = __webpack_require__(
-          /*! babel-runtime/helpers/objectWithoutProperties */ './node_modules/babel-runtime/helpers/objectWithoutProperties.js',
-        );
-
-        var _objectWithoutProperties3 = _interopRequireDefault(
-          _objectWithoutProperties2,
-        );
-
-        var _react = __webpack_require__(
-          /*! react */ './node_modules/react/index.js',
-        );
-
-        var _react2 = _interopRequireDefault(_react);
-
-        var _reactJss = __webpack_require__(
-          /*! react-jss */ './node_modules/react-jss/lib/index.js',
-        );
-
-        var _reactJss2 = _interopRequireDefault(_reactJss);
-
-        var _UserWidget = __webpack_require__(
-          /*! ./UserWidget */ './src/components/UserWidget.js',
-        );
-
-        var _UserWidget2 = _interopRequireDefault(_UserWidget);
-
-        function _interopRequireDefault(obj) {
-          return obj && obj.__esModule ? obj : {default: obj};
-        }
-
-        var styles = {
-          container: {
-            display: 'flex',
-            alignItems: 'flex-start',
-          },
-          column: {
-            flex: {
-              grow: 1,
-              shrink: 0,
-            },
-            width: '33.3%',
-            padding: 10,
-            boxSizing: 'border-box',
-            '&:first-child': {
-              paddingLeft: 0,
-            },
-            '&:last-child': {
-              paddingRight: 0,
-            },
-          },
-        };
-
-        var CATEGORIES = ['applied', 'interviewing', 'hired'];
-
-        var DashboardUserGrid = function DashboardUserGrid(_ref) {
-          var classes = _ref.classes,
-            onUserClick = _ref.onUserClick,
-            props = (0, _objectWithoutProperties3.default)(_ref, [
-              'classes',
-              'onUserClick',
-            ]);
-          return _react2.default.createElement(
-            'div',
-            {className: classes.container},
-            CATEGORIES.map(function(category) {
-              return _react2.default.createElement(
-                'div',
-                {className: classes.column, key: category},
-                props[category] &&
-                  props[category].map(function(user) {
-                    return _react2.default.createElement(_UserWidget2.default, {
-                      key: user.login.uuid,
-                      id: user.login.uuid,
-                      photo: user.picture.thumbnail,
-                      firstName: user.name.first,
-                      lastName: user.name.last,
-                      stage: user.stage,
-                      onClick: onUserClick,
-                    });
-                  }),
-              );
-            }),
-          );
-        };
-
-        exports.default = (0, _reactJss2.default)(styles)(DashboardUserGrid);
-
-        /***/
-      },
-
     /***/ './src/components/ErrorNotice.js':
       /*!***************************************!*\
   !*** ./src/components/ErrorNotice.js ***!
@@ -510,6 +213,12 @@
           value: true,
         });
 
+        var _stringify = __webpack_require__(
+          /*! babel-runtime/core-js/json/stringify */ './node_modules/babel-runtime/core-js/json/stringify.js',
+        );
+
+        var _stringify2 = _interopRequireDefault(_stringify);
+
         var _react = __webpack_require__(
           /*! react */ './node_modules/react/index.js',
         );
@@ -517,10 +226,8 @@
         var _react2 = _interopRequireDefault(_react);
 
         var _reactJss = __webpack_require__(
-          /*! react-jss */ './node_modules/react-jss/lib/index.js',
+          /*! react-jss */ './node_modules/react-jss/dist/react-jss.esm.js',
         );
-
-        var _reactJss2 = _interopRequireDefault(_reactJss);
 
         var _polished = __webpack_require__(
           /*! polished */ './node_modules/polished/dist/polished.es.js',
@@ -530,7 +237,7 @@
           return obj && obj.__esModule ? obj : {default: obj};
         }
 
-        var styles = function styles(theme) {
+        var useStyles = (0, _reactJss.createUseStyles)(function(theme) {
           return {
             container: {
               padding: 20,
@@ -553,33 +260,34 @@
               },
             },
           };
-        };
+        });
 
         var ErrorNotice = function ErrorNotice(_ref) {
-          var classes = _ref.classes,
-            error = _ref.error;
+          var error = _ref.error;
+
+          var css = useStyles();
           return _react2.default.createElement(
             'div',
-            {className: classes.container},
+            {className: css.container},
             _react2.default.createElement(
               'h2',
-              {className: classes.title},
+              {className: css.title},
               'Something went wrong',
             ),
             _react2.default.createElement(
               'p',
-              {className: classes.text},
+              {className: css.text},
               'Please, try again later. Maybe this will help you:',
             ),
             _react2.default.createElement(
               'p',
-              {className: classes.text},
-              error,
+              {className: css.text},
+              (0, _stringify2.default)(error),
             ),
           );
         };
 
-        exports.default = (0, _reactJss2.default)(styles)(ErrorNotice);
+        exports.default = ErrorNotice;
 
         /***/
       },
@@ -613,10 +321,8 @@
         );
 
         var _reactJss = __webpack_require__(
-          /*! react-jss */ './node_modules/react-jss/lib/index.js',
+          /*! react-jss */ './node_modules/react-jss/dist/react-jss.esm.js',
         );
-
-        var _reactJss2 = _interopRequireDefault(_reactJss);
 
         function _interopRequireDefault(obj) {
           return obj && obj.__esModule ? obj : {default: obj};
@@ -627,7 +333,7 @@
          * In real app it must be placed in some separated
          * package (or yarn workspace) with all other UI components.
          */
-        var styles = function styles(theme) {
+        var useStyles = (0, _reactJss.createUseStyles)(function(theme) {
           return {
             loader: {
               borderRadius: 'inherit',
@@ -676,19 +382,20 @@
               },
             },
           };
-        };
+        });
 
         var Loader = function Loader(_ref) {
           var children = _ref.children,
-            classes = _ref.classes,
             className = _ref.className,
             active = _ref.active;
+
+          var css = useStyles();
           return _react2.default.createElement(
             'div',
             {
               className: (0, _classnames2.default)(
-                classes.loader,
-                active && classes.active,
+                css.loader,
+                active && css.active,
                 className,
               ),
             },
@@ -696,15 +403,15 @@
           );
         };
 
-        exports.default = (0, _reactJss2.default)(styles)(Loader);
+        exports.default = Loader;
 
         /***/
       },
 
-    /***/ './src/components/UserWidget.js':
-      /*!**************************************!*\
-  !*** ./src/components/UserWidget.js ***!
-  \**************************************/
+    /***/ './src/components/Section.js':
+      /*!***********************************!*\
+  !*** ./src/components/Section.js ***!
+  \***********************************/
       /*! no static exports found */
       /***/ function(module, exports, __webpack_require__) {
         'use strict';
@@ -712,38 +419,6 @@
         Object.defineProperty(exports, '__esModule', {
           value: true,
         });
-
-        var _getPrototypeOf = __webpack_require__(
-          /*! babel-runtime/core-js/object/get-prototype-of */ './node_modules/babel-runtime/core-js/object/get-prototype-of.js',
-        );
-
-        var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-        var _classCallCheck2 = __webpack_require__(
-          /*! babel-runtime/helpers/classCallCheck */ './node_modules/babel-runtime/helpers/classCallCheck.js',
-        );
-
-        var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-        var _createClass2 = __webpack_require__(
-          /*! babel-runtime/helpers/createClass */ './node_modules/babel-runtime/helpers/createClass.js',
-        );
-
-        var _createClass3 = _interopRequireDefault(_createClass2);
-
-        var _possibleConstructorReturn2 = __webpack_require__(
-          /*! babel-runtime/helpers/possibleConstructorReturn */ './node_modules/babel-runtime/helpers/possibleConstructorReturn.js',
-        );
-
-        var _possibleConstructorReturn3 = _interopRequireDefault(
-          _possibleConstructorReturn2,
-        );
-
-        var _inherits2 = __webpack_require__(
-          /*! babel-runtime/helpers/inherits */ './node_modules/babel-runtime/helpers/inherits.js',
-        );
-
-        var _inherits3 = _interopRequireDefault(_inherits2);
 
         var _react = __webpack_require__(
           /*! react */ './node_modules/react/index.js',
@@ -752,189 +427,38 @@
         var _react2 = _interopRequireDefault(_react);
 
         var _reactJss = __webpack_require__(
-          /*! react-jss */ './node_modules/react-jss/lib/index.js',
+          /*! react-jss */ './node_modules/react-jss/dist/react-jss.esm.js',
         );
-
-        var _reactJss2 = _interopRequireDefault(_reactJss);
-
-        var _Button = __webpack_require__(
-          /*! ./Button */ './src/components/Button.js',
-        );
-
-        var _Button2 = _interopRequireDefault(_Button);
-
-        var _stage = __webpack_require__(
-          /*! ../constants/stage */ './src/constants/stage.js',
-        );
-
-        var _stage2 = _interopRequireDefault(_stage);
 
         function _interopRequireDefault(obj) {
           return obj && obj.__esModule ? obj : {default: obj};
         }
 
-        var styles = function styles(theme) {
+        var useStyles = (0, _reactJss.createUseStyles)(function(theme) {
           return {
-            widget: {
-              background: theme.common.widget,
+            section: {
+              boxShadow: theme.shadow.level1,
+              background: theme.common.card,
               borderRadius: theme.common.radius,
+              margin: 20,
               padding: 20,
-              marginTop: 20,
-              '&:first-child': {
-                marginTop: 0,
-              },
-            },
-            info: {
-              display: 'flex',
-              alignItems: 'center',
-            },
-            photo: {
-              width: 40,
-              height: 40,
-              borderRadius: '50%',
-              objectFit: 'cover',
-              marginRight: 10,
-              flexShrink: 0,
-            },
-            name: {
-              margin: 0,
-            },
-            actions: {
-              composes: '$info',
-              marginTop: 10,
-              justifyContent: 'space-between',
-            },
-            back: {
-              marginRight: 'auto',
-            },
-            forward: {
-              marginLeft: 'auto',
+              position: 'relative',
             },
           };
-        };
-
-        var UserWidget = (function(_Component) {
-          (0, _inherits3.default)(UserWidget, _Component);
-
-          function UserWidget() {
-            var _ref;
-
-            var _temp, _this, _ret;
-
-            (0, _classCallCheck3.default)(this, UserWidget);
-
-            for (
-              var _len = arguments.length, args = Array(_len), _key = 0;
-              _key < _len;
-              _key++
-            ) {
-              args[_key] = arguments[_key];
-            }
-
-            return (
-              (_ret = ((_temp = ((_this = (0,
-              _possibleConstructorReturn3.default)(
-                this,
-                (_ref =
-                  UserWidget.__proto__ ||
-                  (0, _getPrototypeOf2.default)(UserWidget)).call.apply(
-                  _ref,
-                  [this].concat(args),
-                ),
-              )),
-              _this)),
-              (_this.handleLeftClick = function() {
-                _this.props.onClick(_this.props.id, _this.props.stage - 1);
-              }),
-              (_this.handleRightClick = function() {
-                _this.props.onClick(_this.props.id, _this.props.stage + 1);
-              }),
-              _temp)),
-              (0, _possibleConstructorReturn3.default)(_this, _ret)
-            );
-          }
-
-          (0, _createClass3.default)(UserWidget, [
-            {
-              key: 'render',
-              value: function render() {
-                var _props = this.props,
-                  classes = _props.classes,
-                  photo = _props.photo,
-                  firstName = _props.firstName,
-                  lastName = _props.lastName,
-                  stage = _props.stage;
-
-                return _react2.default.createElement(
-                  'div',
-                  {className: classes.widget},
-                  _react2.default.createElement(
-                    'div',
-                    {className: classes.info},
-                    _react2.default.createElement('img', {
-                      className: classes.photo,
-                      src: photo,
-                      role: 'presentation',
-                    }),
-                    _react2.default.createElement(
-                      'h4',
-                      {className: classes.name},
-                      firstName + ' ' + lastName,
-                    ),
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    {className: classes.actions},
-                    stage !== _stage2.default.APPLIED &&
-                      _react2.default.createElement(
-                        _Button2.default,
-                        {
-                          className: classes.back,
-                          onClick: this.handleLeftClick,
-                        },
-                        '\u2190',
-                      ),
-                    stage !== _stage2.default.HIRED &&
-                      _react2.default.createElement(
-                        _Button2.default,
-                        {
-                          className: classes.forward,
-                          onClick: this.handleRightClick,
-                        },
-                        '\u2192',
-                      ),
-                  ),
-                );
-              },
-            },
-          ]);
-          return UserWidget;
-        })(_react.Component);
-
-        exports.default = (0, _reactJss2.default)(styles)(UserWidget);
-
-        /***/
-      },
-
-    /***/ './src/constants/stage.js':
-      /*!********************************!*\
-  !*** ./src/constants/stage.js ***!
-  \********************************/
-      /*! no static exports found */
-      /***/ function(module, exports, __webpack_require__) {
-        'use strict';
-
-        Object.defineProperty(exports, '__esModule', {
-          value: true,
         });
-        /**
-         * Current user stage (position on dashboard)
-         */
-        exports.default = {
-          APPLIED: 0,
-          INTERVIEWING: 1,
-          HIRED: 2,
+
+        var Section = function Section(_ref) {
+          var children = _ref.children;
+
+          var classes = useStyles();
+          return _react2.default.createElement(
+            'div',
+            {className: classes.section},
+            children,
+          );
         };
+
+        exports.default = Section;
 
         /***/
       },
@@ -958,7 +482,7 @@
         var _react2 = _interopRequireDefault(_react);
 
         var _reactJss = __webpack_require__(
-          /*! react-jss */ './node_modules/react-jss/lib/index.js',
+          /*! react-jss */ './node_modules/react-jss/dist/react-jss.esm.js',
         );
 
         var _GraphQLProvider = __webpack_require__(
@@ -1018,6 +542,158 @@
         /***/
       },
 
+    /***/ './src/containers/CountriesByContinent.js':
+      /*!************************************************!*\
+  !*** ./src/containers/CountriesByContinent.js ***!
+  \************************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict';
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        });
+
+        var _slicedToArray2 = __webpack_require__(
+          /*! babel-runtime/helpers/slicedToArray */ './node_modules/babel-runtime/helpers/slicedToArray.js',
+        );
+
+        var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
+
+        var _react = __webpack_require__(
+          /*! react */ './node_modules/react/index.js',
+        );
+
+        var _react2 = _interopRequireDefault(_react);
+
+        var _hooks = __webpack_require__(
+          /*! @apollo/client/react/hooks */ './node_modules/@apollo/client/react/hooks/index.js',
+        );
+
+        var _countryByContinent = __webpack_require__(
+          /*! ../graphql/countryByContinent.gql */ './src/graphql/countryByContinent.gql',
+        );
+
+        var _countryByContinent2 = _interopRequireDefault(_countryByContinent);
+
+        var _ErrorNotice = __webpack_require__(
+          /*! ../components/ErrorNotice */ './src/components/ErrorNotice.js',
+        );
+
+        var _ErrorNotice2 = _interopRequireDefault(_ErrorNotice);
+
+        var _Loader = __webpack_require__(
+          /*! ../components/Loader */ './src/components/Loader.js',
+        );
+
+        var _Loader2 = _interopRequireDefault(_Loader);
+
+        function _interopRequireDefault(obj) {
+          return obj && obj.__esModule ? obj : {default: obj};
+        }
+
+        /**
+         * Illustration how queries work.
+         * - Each query is saved in Apollo Cache (unless you specify 'no-cache' fetch policy).
+         * - You can force to fetch new data from the back-end via fetch policy property.
+         */
+        var CountriesByContinent = function CountriesByContinent() {
+          var _useState = (0, _react.useState)('EU'),
+            _useState2 = (0, _slicedToArray3.default)(_useState, 2),
+            continent = _useState2[0],
+            setContinent = _useState2[1];
+
+          var _useState3 = (0, _react.useState)(false),
+            _useState4 = (0, _slicedToArray3.default)(_useState3, 2),
+            force = _useState4[0],
+            setForce = _useState4[1];
+
+          var _useQuery = (0, _hooks.useQuery)(_countryByContinent2.default, {
+              variables: {
+                code: continent,
+              },
+              fetchPolicy: force ? 'network-only' : 'cache-first',
+            }),
+            data = _useQuery.data,
+            loading = _useQuery.loading,
+            error = _useQuery.error;
+
+          if (error)
+            return _react2.default.createElement(_ErrorNotice2.default, {
+              error: error,
+            });
+
+          return _react2.default.createElement(
+            _Loader2.default,
+            {active: loading},
+            _react2.default.createElement(
+              'h4',
+              null,
+              'Loading data (w/o forcing network requests) & Caching',
+            ),
+            _react2.default.createElement(
+              'form',
+              {
+                onSubmit: function onSubmit(e) {
+                  e.preventDefault();
+                  setContinent(e.target.elements.continent.value);
+                  setForce(e.target.elements.force.checked);
+                },
+              },
+              _react2.default.createElement('input', {
+                type: 'text',
+                placeholder: 'Continent (EU, AS, NA, etc.)',
+                name: 'continent',
+                defaultValue: 'EU',
+              }),
+              ' ',
+              _react2.default.createElement(
+                'button',
+                {type: 'submit'},
+                'Load countries',
+              ),
+              _react2.default.createElement('br', null),
+              _react2.default.createElement('input', {
+                type: 'checkbox',
+                name: 'force',
+                id: 'force',
+              }),
+              ' ',
+              _react2.default.createElement(
+                'label',
+                {htmlFor: 'force'},
+                'Force network request',
+              ),
+            ),
+            data &&
+              data.continent &&
+              _react2.default.createElement(
+                _react.Fragment,
+                null,
+                _react2.default.createElement(
+                  'h2',
+                  null,
+                  data.continent.name + ' (' + data.continent.code + ')',
+                ),
+                data.continent.countries.map(function(_ref) {
+                  var emoji = _ref.emoji,
+                    code = _ref.code,
+                    capital = _ref.capital;
+                  return _react2.default.createElement(
+                    'div',
+                    {key: code},
+                    emoji + ' (' + code + ') - ' + capital,
+                  );
+                }),
+              ),
+          );
+        };
+
+        exports.default = CountriesByContinent;
+
+        /***/
+      },
+
     /***/ './src/containers/Dashboard.js':
       /*!*************************************!*\
   !*** ./src/containers/Dashboard.js ***!
@@ -1036,59 +712,39 @@
 
         var _react2 = _interopRequireDefault(_react);
 
-        var _reactApollo = __webpack_require__(
-          /*! react-apollo */ './node_modules/react-apollo/react-apollo.browser.umd.js',
+        var _CountriesByContinent = __webpack_require__(
+          /*! ./CountriesByContinent */ './src/containers/CountriesByContinent.js',
         );
 
-        var _groupBy = __webpack_require__(
-          /*! lodash/groupBy */ './node_modules/lodash/groupBy.js',
+        var _CountriesByContinent2 = _interopRequireDefault(
+          _CountriesByContinent,
         );
 
-        var _groupBy2 = _interopRequireDefault(_groupBy);
-
-        var _Loader = __webpack_require__(
-          /*! ../components/Loader */ './src/components/Loader.js',
+        var _EditExistingCountry = __webpack_require__(
+          /*! ./EditExistingCountry */ './src/containers/EditExistingCountry.js',
         );
 
-        var _Loader2 = _interopRequireDefault(_Loader);
-
-        var _DashboardUserGrid = __webpack_require__(
-          /*! ../components/DashboardUserGrid */ './src/components/DashboardUserGrid.js',
+        var _EditExistingCountry2 = _interopRequireDefault(
+          _EditExistingCountry,
         );
 
-        var _DashboardUserGrid2 = _interopRequireDefault(_DashboardUserGrid);
-
-        var _ErrorNotice = __webpack_require__(
-          /*! ../components/ErrorNotice */ './src/components/ErrorNotice.js',
+        var _RestAPI = __webpack_require__(
+          /*! ./RestAPI */ './src/containers/RestAPI.js',
         );
 
-        var _ErrorNotice2 = _interopRequireDefault(_ErrorNotice);
+        var _RestAPI2 = _interopRequireDefault(_RestAPI);
 
-        var _DashboardLayout = __webpack_require__(
-          /*! ../components/DashboardLayout */ './src/components/DashboardLayout.js',
+        var _QueryDeduplication = __webpack_require__(
+          /*! ./QueryDeduplication */ './src/containers/QueryDeduplication.js',
         );
 
-        var _DashboardLayout2 = _interopRequireDefault(_DashboardLayout);
+        var _QueryDeduplication2 = _interopRequireDefault(_QueryDeduplication);
 
-        var _usersQuery = __webpack_require__(
-          /*! ../graphql/usersQuery.gql */ './src/graphql/usersQuery.gql',
+        var _Section = __webpack_require__(
+          /*! ../components/Section */ './src/components/Section.js',
         );
 
-        var _usersQuery2 = _interopRequireDefault(_usersQuery);
-
-        var _updateStageMutation = __webpack_require__(
-          /*! ../graphql/updateStageMutation.gql */ './src/graphql/updateStageMutation.gql',
-        );
-
-        var _updateStageMutation2 = _interopRequireDefault(
-          _updateStageMutation,
-        );
-
-        var _stage = __webpack_require__(
-          /*! ../constants/stage */ './src/constants/stage.js',
-        );
-
-        var _stage2 = _interopRequireDefault(_stage);
+        var _Section2 = _interopRequireDefault(_Section);
 
         function _interopRequireDefault(obj) {
           return obj && obj.__esModule ? obj : {default: obj};
@@ -1096,56 +752,33 @@
 
         var Dashboard = function Dashboard() {
           return _react2.default.createElement(
-            _DashboardLayout2.default,
+            _react.Fragment,
             null,
             _react2.default.createElement(
-              _reactApollo.Query,
-              {query: _usersQuery2.default},
-              function(_ref) {
-                var data = _ref.data,
-                  loading = _ref.loading,
-                  error = _ref.error,
-                  client = _ref.client;
-
-                if (error)
-                  return _react2.default.createElement(_ErrorNotice2.default, {
-                    error: error,
-                  });
-
-                /**
-                 * Sort users by 'stage' (only client data)
-                 * @see GraphQLProvider.js
-                 */
-                var userGroups = (0, _groupBy2.default)(
-                  data && data.users && data.users.results,
-                  function(user) {
-                    return user.stage;
-                  },
-                );
-
-                /**
-                 * @todo Add filters with with writing data into  apollo cache.
-                 */
-
-                return _react2.default.createElement(
-                  _Loader2.default,
-                  {active: loading},
-                  _react2.default.createElement(_DashboardUserGrid2.default, {
-                    applied: userGroups[_stage2.default.APPLIED],
-                    interviewing: userGroups[_stage2.default.INTERVIEWING],
-                    hired: userGroups[_stage2.default.HIRED],
-                    onUserClick: function onUserClick(id, stage) {
-                      client.mutate({
-                        mutation: _updateStageMutation2.default,
-                        variables: {
-                          id: id,
-                          stage: stage,
-                        },
-                      });
-                    },
-                  }),
-                );
-              },
+              _Section2.default,
+              null,
+              _react2.default.createElement(
+                _CountriesByContinent2.default,
+                null,
+              ),
+            ),
+            _react2.default.createElement(
+              _Section2.default,
+              null,
+              _react2.default.createElement(
+                _EditExistingCountry2.default,
+                null,
+              ),
+            ),
+            _react2.default.createElement(
+              _Section2.default,
+              null,
+              _react2.default.createElement(_QueryDeduplication2.default, null),
+            ),
+            _react2.default.createElement(
+              _Section2.default,
+              null,
+              _react2.default.createElement(_RestAPI2.default, null),
             ),
           );
         };
@@ -1155,10 +788,10 @@
         /***/
       },
 
-    /***/ './src/containers/GraphQLProvider.js':
-      /*!*******************************************!*\
-  !*** ./src/containers/GraphQLProvider.js ***!
-  \*******************************************/
+    /***/ './src/containers/EditExistingCountry.js':
+      /*!***********************************************!*\
+  !*** ./src/containers/EditExistingCountry.js ***!
+  \***********************************************/
       /*! no static exports found */
       /***/ function(module, exports, __webpack_require__) {
         'use strict';
@@ -1179,24 +812,118 @@
 
         var _react2 = _interopRequireDefault(_react);
 
-        var _reactApollo = __webpack_require__(
-          /*! react-apollo */ './node_modules/react-apollo/react-apollo.browser.umd.js',
+        var _hooks = __webpack_require__(
+          /*! @apollo/client/react/hooks */ './node_modules/@apollo/client/react/hooks/index.js',
         );
 
-        var _apolloClient = __webpack_require__(
-          /*! apollo-client */ './node_modules/apollo-client/index.js',
+        var _country = __webpack_require__(
+          /*! ../graphql/fragments/country.gql */ './src/graphql/fragments/country.gql',
         );
 
-        var _apolloCacheInmemory = __webpack_require__(
-          /*! apollo-cache-inmemory */ './node_modules/apollo-cache-inmemory/lib/index.js',
+        var _country2 = _interopRequireDefault(_country);
+
+        function _interopRequireDefault(obj) {
+          return obj && obj.__esModule ? obj : {default: obj};
+        }
+
+        /**
+         * Illustation how to work with fragments and modify parts of existing data
+         * using 'readFragment' and 'writeFragment'.
+         */
+        var EditExistingCountry = function EditExistingCountry() {
+          var client = (0, _hooks.useApolloClient)();
+
+          return _react2.default.createElement(
+            _react.Fragment,
+            null,
+            _react2.default.createElement(
+              'h4',
+              null,
+              'Modifying cache with Fragments',
+            ),
+            _react2.default.createElement(
+              'form',
+              {
+                onSubmit: function onSubmit(e) {
+                  e.preventDefault();
+                  var fragment = {
+                    id: 'Country:' + e.target.elements.code.value,
+                    fragment: _country2.default,
+                  };
+
+                  var data = client.readFragment(fragment);
+
+                  if (!data) {
+                    console.error('No country found! :(');
+                  }
+
+                  client.writeFragment(
+                    (0, _extends3.default)({}, fragment, {
+                      data: (0, _extends3.default)({}, data, {
+                        capital: e.target.elements.capital.value,
+                      }),
+                    }),
+                  );
+                },
+              },
+              _react2.default.createElement('input', {
+                type: 'text',
+                placeholder: 'Enter Country Code',
+                name: 'code',
+              }),
+              ' ',
+              _react2.default.createElement('input', {
+                type: 'text',
+                placeholder: 'Set a new capital',
+                name: 'capital',
+              }),
+              ' ',
+              _react2.default.createElement(
+                'button',
+                {type: 'submit'},
+                'Overwrite',
+              ),
+            ),
+          );
+        };
+
+        exports.default = EditExistingCountry;
+
+        /***/
+      },
+
+    /***/ './src/containers/GraphQLProvider.js':
+      /*!*******************************************!*\
+  !*** ./src/containers/GraphQLProvider.js ***!
+  \*******************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict';
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        });
+
+        var _react = __webpack_require__(
+          /*! react */ './node_modules/react/index.js',
         );
 
-        var _apolloLinkState = __webpack_require__(
-          /*! apollo-link-state */ './node_modules/apollo-link-state/lib/index.js',
+        var _react2 = _interopRequireDefault(_react);
+
+        var _core = __webpack_require__(
+          /*! @apollo/client/core */ './node_modules/@apollo/client/core/index.js',
         );
 
-        var _apolloLink = __webpack_require__(
-          /*! apollo-link */ './node_modules/apollo-link/lib/index.js',
+        var _cache = __webpack_require__(
+          /*! @apollo/client/cache */ './node_modules/@apollo/client/cache/index.js',
+        );
+
+        var _react3 = __webpack_require__(
+          /*! @apollo/client/react */ './node_modules/@apollo/client/react/index.js',
+        );
+
+        var _batchHttp = __webpack_require__(
+          /*! @apollo/client/link/batch-http */ './node_modules/@apollo/client/link/batch-http/index.js',
         );
 
         var _apolloLinkRest = __webpack_require__(
@@ -1207,56 +934,24 @@
           return obj && obj.__esModule ? obj : {default: obj};
         }
 
-        /**
-         * Just for example how local stage is managed in react apollo
-         * In real app those resolvers must be moved into separated module.
-         */
-        var resolvers = {
-          defaults: {
-            stage: 0, // In this example we just set user as 'applied'
-          },
-          resolvers: {
-            Mutation: {
-              updateStage: function updateStage(_, _ref, _ref2) {
-                var id = _ref.id,
-                  stage = _ref.stage;
-                var cache = _ref2.cache;
-
-                cache.writeData({id: id, data: {stage: stage}});
-                return null;
-              },
-            },
-          },
-        };
-
-        /**
-         * Personally, I don't like Redux because we need to write too many code
-         * (resolvers, actions, action creators, mapping state to props) for solving simple tasks
-         *
-         * So in this case to experiment how react-apollo works with rest links.
-         * It's, anyway, a good experience.
-         */
-        var restLink = new _apolloLinkRest.RestLink({
-          uri: 'https://randomuser.me/api/',
-        });
-
-        var cache = new _apolloCacheInmemory.InMemoryCache({
-          dataIdFromObject: function dataIdFromObject(object) {
-            return (
-              // Additional operation to normalize cache
-              (object.login && object.login.uuid) || object.id || null
-            );
-          },
-        });
-
-        var client = new _apolloClient.ApolloClient({
-          link: _apolloLink.ApolloLink.from([
-            (0, _apolloLinkState.withClientState)(
-              (0, _extends3.default)({cache: cache}, resolvers),
-            ),
-            restLink,
+        var client = new _core.ApolloClient({
+          link: _core.ApolloLink.from([
+            new _apolloLinkRest.RestLink({
+              uri: 'https://randomuser.me/api/',
+            }),
+            new _batchHttp.BatchHttpLink({
+              uri: 'https://countries.trevorblades.com/graphql',
+            }),
           ]),
-          cache: cache,
+          cache: new _cache.InMemoryCache({
+            dataIdFromObject: function dataIdFromObject(object) {
+              var id = object.code || object.id;
+              if (id) {
+                return object.__typename + ':' + id;
+              }
+              return (0, _cache.defaultDataIdFromObject)(object);
+            },
+          }),
 
           /**
            * Because it is an experiment we use hardcoded value
@@ -1266,10 +961,10 @@
           addTypeName: true,
         });
 
-        var GraphQLProvider = function GraphQLProvider(_ref3) {
-          var children = _ref3.children;
+        var GraphQLProvider = function GraphQLProvider(_ref) {
+          var children = _ref.children;
           return _react2.default.createElement(
-            _reactApollo.ApolloProvider,
+            _react3.ApolloProvider,
             {client: client},
             children,
           );
@@ -1280,47 +975,375 @@
         /***/
       },
 
-    /***/ './src/graphql/updateStageMutation.gql':
-      /*!*********************************************!*\
-  !*** ./src/graphql/updateStageMutation.gql ***!
-  \*********************************************/
+    /***/ './src/containers/QueryDeduplication.js':
+      /*!**********************************************!*\
+  !*** ./src/containers/QueryDeduplication.js ***!
+  \**********************************************/
       /*! no static exports found */
-      /***/ function(module, exports) {
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict';
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        });
+
+        var _regenerator = __webpack_require__(
+          /*! babel-runtime/regenerator */ './node_modules/babel-runtime/regenerator/index.js',
+        );
+
+        var _regenerator2 = _interopRequireDefault(_regenerator);
+
+        var _taggedTemplateLiteral2 = __webpack_require__(
+          /*! babel-runtime/helpers/taggedTemplateLiteral */ './node_modules/babel-runtime/helpers/taggedTemplateLiteral.js',
+        );
+
+        var _taggedTemplateLiteral3 = _interopRequireDefault(
+          _taggedTemplateLiteral2,
+        );
+
+        var _asyncToGenerator2 = __webpack_require__(
+          /*! babel-runtime/helpers/asyncToGenerator */ './node_modules/babel-runtime/helpers/asyncToGenerator.js',
+        );
+
+        var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+        var _templateObject = (0, _taggedTemplateLiteral3.default)(
+            [
+              '\n        query DeduplicatedQuery {\n          language(code: "en") {\n            name\n            code\n          }\n        }\n      ',
+            ],
+            [
+              '\n        query DeduplicatedQuery {\n          language(code: "en") {\n            name\n            code\n          }\n        }\n      ',
+            ],
+          ),
+          _templateObject2 = (0, _taggedTemplateLiteral3.default)(
+            [
+              '\n        query SubsetDeduplicatedQuery {\n          language(code: "en") {\n            code\n          }\n        }\n      ',
+            ],
+            [
+              '\n        query SubsetDeduplicatedQuery {\n          language(code: "en") {\n            code\n          }\n        }\n      ',
+            ],
+          ),
+          _templateObject3 = (0, _taggedTemplateLiteral3.default)(
+            [
+              '\n        query DeduplicatedQuery {\n          language(code: "en") {\n            code\n            native\n          }\n        }\n      ',
+            ],
+            [
+              '\n        query DeduplicatedQuery {\n          language(code: "en") {\n            code\n            native\n          }\n        }\n      ',
+            ],
+          ),
+          _templateObject4 = (0, _taggedTemplateLiteral3.default)(
+            [
+              '\n        query DeduplicatedQuery {\n          language(code: "en") {\n            code\n            rtl\n          }\n        }\n      ',
+            ],
+            [
+              '\n        query DeduplicatedQuery {\n          language(code: "en") {\n            code\n            rtl\n          }\n        }\n      ',
+            ],
+          );
+
+        var _react = __webpack_require__(
+          /*! react */ './node_modules/react/index.js',
+        );
+
+        var _react2 = _interopRequireDefault(_react);
+
+        var _core = __webpack_require__(
+          /*! @apollo/client/core */ './node_modules/@apollo/client/core/index.js',
+        );
+
+        var _hooks = __webpack_require__(
+          /*! @apollo/client/react/hooks */ './node_modules/@apollo/client/react/hooks/index.js',
+        );
+
+        function _interopRequireDefault(obj) {
+          return obj && obj.__esModule ? obj : {default: obj};
+        }
+
+        var QueryDeduplication = function QueryDeduplication() {
+          var client = (0, _hooks.useApolloClient)();
+
+          var handleDeduplicationClick = (function() {
+            var _ref = (0, _asyncToGenerator3.default)(
+              /*#__PURE__*/ _regenerator2.default.mark(function _callee() {
+                var firstData, secondData;
+                return _regenerator2.default.wrap(
+                  function _callee$(_context) {
+                    while (1) {
+                      switch ((_context.prev = _context.next)) {
+                        case 0:
+                          _context.next = 2;
+                          return client.query({
+                            query: (0, _core.gql)(_templateObject),
+                          });
+
+                        case 2:
+                          firstData = _context.sent;
+
+                          console.log(firstData.data.language);
+
+                          // This query is a subset of the DeduplicatedQuery
+                          _context.next = 6;
+                          return client.query({
+                            query: (0, _core.gql)(_templateObject2),
+                          });
+
+                        case 6:
+                          secondData = _context.sent;
+
+                          console.log(secondData.data.language);
+
+                        case 8:
+                        case 'end':
+                          return _context.stop();
+                      }
+                    }
+                  },
+                  _callee,
+                  undefined,
+                );
+              }),
+            );
+
+            return function handleDeduplicationClick() {
+              return _ref.apply(this, arguments);
+            };
+          })();
+
+          var handleNoDeduplicationClick = (function() {
+            var _ref2 = (0, _asyncToGenerator3.default)(
+              /*#__PURE__*/ _regenerator2.default.mark(function _callee2() {
+                return _regenerator2.default.wrap(
+                  function _callee2$(_context2) {
+                    while (1) {
+                      switch ((_context2.prev = _context2.next)) {
+                        case 0:
+                          _context2.next = 2;
+                          return client.query({
+                            query: (0, _core.gql)(_templateObject3),
+                          });
+
+                        case 2:
+                          _context2.next = 4;
+                          return client.query({
+                            query: (0, _core.gql)(_templateObject4),
+                          });
+
+                        case 4:
+                        case 'end':
+                          return _context2.stop();
+                      }
+                    }
+                  },
+                  _callee2,
+                  undefined,
+                );
+              }),
+            );
+
+            return function handleNoDeduplicationClick() {
+              return _ref2.apply(this, arguments);
+            };
+          })();
+
+          return _react2.default.createElement(
+            _react.Fragment,
+            null,
+            _react2.default.createElement('h4', null, 'Query Deduplication'),
+            _react2.default.createElement(
+              'button',
+              {onClick: handleDeduplicationClick},
+              'Test query deduplication',
+            ),
+            ' ',
+            _react2.default.createElement(
+              'button',
+              {onClick: handleNoDeduplicationClick},
+              'Test non deduping queries',
+            ),
+          );
+        };
+
+        exports.default = QueryDeduplication;
+
+        /***/
+      },
+
+    /***/ './src/containers/RestAPI.js':
+      /*!***********************************!*\
+  !*** ./src/containers/RestAPI.js ***!
+  \***********************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
+        'use strict';
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true,
+        });
+
+        var _extends2 = __webpack_require__(
+          /*! babel-runtime/helpers/extends */ './node_modules/babel-runtime/helpers/extends.js',
+        );
+
+        var _extends3 = _interopRequireDefault(_extends2);
+
+        var _toConsumableArray2 = __webpack_require__(
+          /*! babel-runtime/helpers/toConsumableArray */ './node_modules/babel-runtime/helpers/toConsumableArray.js',
+        );
+
+        var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+
+        var _react = __webpack_require__(
+          /*! react */ './node_modules/react/index.js',
+        );
+
+        var _react2 = _interopRequireDefault(_react);
+
+        var _hooks = __webpack_require__(
+          /*! @apollo/client/react/hooks */ './node_modules/@apollo/client/react/hooks/index.js',
+        );
+
+        var _usersQuery = __webpack_require__(
+          /*! ../graphql/usersQuery.gql */ './src/graphql/usersQuery.gql',
+        );
+
+        var _usersQuery2 = _interopRequireDefault(_usersQuery);
+
+        var _Loader = __webpack_require__(
+          /*! ../components/Loader */ './src/components/Loader.js',
+        );
+
+        var _Loader2 = _interopRequireDefault(_Loader);
+
+        function _interopRequireDefault(obj) {
+          return obj && obj.__esModule ? obj : {default: obj};
+        }
+
+        /**
+         * Example how to use REST API inside Apollo Client (if needed).
+         * Also, an example how to modify data in cache but using another approach
+         * with "readQuery" and "writeQuery".
+         */
+        var RestAPI = function RestAPI() {
+          var _useQuery = (0, _hooks.useQuery)(_usersQuery2.default),
+            data = _useQuery.data,
+            loading = _useQuery.loading,
+            client = _useQuery.client;
+
+          var handleSubmit = (0, _react.useCallback)(
+            function(e) {
+              e.preventDefault();
+
+              var newResults = [].concat(
+                (0, _toConsumableArray3.default)(data.users.results),
+              );
+
+              // Create a new entry
+              newResults.push(
+                (0, _extends3.default)({}, newResults[0], {
+                  name: (0, _extends3.default)({}, newResults[0].name, {
+                    title: 'N/A',
+                    first: 'N/A',
+                    last: 'N/A',
+                  }),
+                  login: (0, _extends3.default)({}, newResults[0].login, {
+                    uuid: e.target.elements.uuid.value,
+                  }),
+                }),
+              );
+
+              client.writeQuery({
+                query: _usersQuery2.default,
+                data: (0, _extends3.default)({}, data, {
+                  users: (0, _extends3.default)({}, data.users, {
+                    results: newResults,
+                  }),
+                }),
+              });
+            },
+            [data],
+          );
+
+          return _react2.default.createElement(
+            _react.Fragment,
+            null,
+            _react2.default.createElement(
+              _Loader2.default,
+              {active: loading},
+              _react2.default.createElement(
+                'h4',
+                null,
+                'Consuming REST API (apollo-link-rest) & Modifying cache with query overwriting',
+              ),
+              _react2.default.createElement(
+                'form',
+                {
+                  onSubmit: handleSubmit,
+                },
+                _react2.default.createElement('input', {
+                  type: 'text',
+                  placeholder: 'Enter UUID',
+                  name: 'uuid',
+                }),
+                ' ',
+                _react2.default.createElement(
+                  'button',
+                  {type: 'submit'},
+                  'Add new user',
+                ),
+              ),
+              data &&
+                data.users.results.map(function(_ref) {
+                  var login = _ref.login,
+                    name = _ref.name;
+                  return _react2.default.createElement(
+                    'div',
+                    {key: login.uuid},
+                    name.title +
+                      ' ' +
+                      name.first +
+                      ' ' +
+                      name.last +
+                      ' (' +
+                      login.uuid +
+                      ')',
+                  );
+                }),
+            ),
+          );
+        };
+
+        exports.default = RestAPI;
+
+        /***/
+      },
+
+    /***/ './src/graphql/countryByContinent.gql':
+      /*!********************************************!*\
+  !*** ./src/graphql/countryByContinent.gql ***!
+  \********************************************/
+      /*! no static exports found */
+      /***/ function(module, exports, __webpack_require__) {
         var doc = {
           kind: 'Document',
           definitions: [
             {
               kind: 'OperationDefinition',
-              operation: 'mutation',
-              name: {kind: 'Name', value: 'UpdateStageMutation'},
+              operation: 'query',
+              name: {kind: 'Name', value: 'CountryByContinentQuery'},
               variableDefinitions: [
                 {
                   kind: 'VariableDefinition',
                   variable: {
                     kind: 'Variable',
-                    name: {kind: 'Name', value: 'id'},
+                    name: {kind: 'Name', value: 'code'},
                   },
                   type: {
                     kind: 'NonNullType',
                     type: {
                       kind: 'NamedType',
-                      name: {kind: 'Name', value: 'Int'},
+                      name: {kind: 'Name', value: 'ID'},
                     },
                   },
-                },
-                {
-                  kind: 'VariableDefinition',
-                  variable: {
-                    kind: 'Variable',
-                    name: {kind: 'Name', value: 'stage'},
-                  },
-                  type: {
-                    kind: 'NonNullType',
-                    type: {
-                      kind: 'NamedType',
-                      name: {kind: 'Name', value: 'Int'},
-                    },
-                  },
+                  directives: [],
                 },
               ],
               directives: [],
@@ -1329,42 +1352,239 @@
                 selections: [
                   {
                     kind: 'Field',
-                    name: {kind: 'Name', value: 'updateStage'},
+                    name: {kind: 'Name', value: 'continent'},
                     arguments: [
                       {
                         kind: 'Argument',
-                        name: {kind: 'Name', value: 'id'},
+                        name: {kind: 'Name', value: 'code'},
                         value: {
                           kind: 'Variable',
-                          name: {kind: 'Name', value: 'id'},
-                        },
-                      },
-                      {
-                        kind: 'Argument',
-                        name: {kind: 'Name', value: 'stage'},
-                        value: {
-                          kind: 'Variable',
-                          name: {kind: 'Name', value: 'stage'},
+                          name: {kind: 'Name', value: 'code'},
                         },
                       },
                     ],
-                    directives: [
-                      {
-                        kind: 'Directive',
-                        name: {kind: 'Name', value: 'client'},
-                        arguments: [],
-                      },
-                    ],
+                    directives: [],
+                    selectionSet: {
+                      kind: 'SelectionSet',
+                      selections: [
+                        {
+                          kind: 'Field',
+                          name: {kind: 'Name', value: 'code'},
+                          arguments: [],
+                          directives: [],
+                        },
+                        {
+                          kind: 'Field',
+                          name: {kind: 'Name', value: 'name'},
+                          arguments: [],
+                          directives: [],
+                        },
+                        {
+                          kind: 'Field',
+                          name: {kind: 'Name', value: 'countries'},
+                          arguments: [],
+                          directives: [],
+                          selectionSet: {
+                            kind: 'SelectionSet',
+                            selections: [
+                              {
+                                kind: 'FragmentSpread',
+                                name: {kind: 'Name', value: 'Country'},
+                                directives: [],
+                              },
+                            ],
+                          },
+                        },
+                      ],
+                    },
                   },
                 ],
               },
             },
           ],
-          loc: {start: 0, end: 214},
+          loc: {start: 0, end: 261},
         };
         doc.loc.source = {
           body:
-            "mutation UpdateStageMutation($id: Int!, $stage: Int!) {\n  # We don't return nothing as response from mutation\n  # because direct cache changes will trigger UI changes\n  updateStage(id: $id, stage: $stage) @client\n}",
+            '#import "./fragments/country.gql"\n\nquery CountryByContinentQuery ($code: ID!) {\n  continent(code: $code) {\n    code\n    name\n    countries {\n      # GraphQL Framgents\n      # https://www.apollographql.com/docs/react/data/fragments/\n      ...Country\n    }\n  }\n}\n',
+          name: 'GraphQL request',
+          locationOffset: {line: 1, column: 1},
+        };
+
+        var names = {};
+        function unique(defs) {
+          return defs.filter(function(def) {
+            if (def.kind !== 'FragmentDefinition') return true;
+            var name = def.name.value;
+            if (names[name]) {
+              return false;
+            } else {
+              names[name] = true;
+              return true;
+            }
+          });
+        }
+        doc.definitions = doc.definitions.concat(
+          unique(
+            __webpack_require__(
+              /*! ./fragments/country.gql */ './src/graphql/fragments/country.gql',
+            ).definitions,
+          ),
+        );
+
+        // Collect any fragment/type references from a node, adding them to the refs Set
+        function collectFragmentReferences(node, refs) {
+          if (node.kind === 'FragmentSpread') {
+            refs.add(node.name.value);
+          } else if (node.kind === 'VariableDefinition') {
+            var type = node.type;
+            if (type.kind === 'NamedType') {
+              refs.add(type.name.value);
+            }
+          }
+
+          if (node.selectionSet) {
+            node.selectionSet.selections.forEach(function(selection) {
+              collectFragmentReferences(selection, refs);
+            });
+          }
+
+          if (node.variableDefinitions) {
+            node.variableDefinitions.forEach(function(def) {
+              collectFragmentReferences(def, refs);
+            });
+          }
+
+          if (node.definitions) {
+            node.definitions.forEach(function(def) {
+              collectFragmentReferences(def, refs);
+            });
+          }
+        }
+
+        var definitionRefs = {};
+        (function extractReferences() {
+          doc.definitions.forEach(function(def) {
+            if (def.name) {
+              var refs = new Set();
+              collectFragmentReferences(def, refs);
+              definitionRefs[def.name.value] = refs;
+            }
+          });
+        })();
+
+        function findOperation(doc, name) {
+          for (var i = 0; i < doc.definitions.length; i++) {
+            var element = doc.definitions[i];
+            if (element.name && element.name.value == name) {
+              return element;
+            }
+          }
+        }
+
+        function oneQuery(doc, operationName) {
+          // Copy the DocumentNode, but clear out the definitions
+          var newDoc = {
+            kind: doc.kind,
+            definitions: [findOperation(doc, operationName)],
+          };
+          if (doc.hasOwnProperty('loc')) {
+            newDoc.loc = doc.loc;
+          }
+
+          // Now, for the operation we're running, find any fragments referenced by
+          // it or the fragments it references
+          var opRefs = definitionRefs[operationName] || new Set();
+          var allRefs = new Set();
+          var newRefs = new Set();
+
+          // IE 11 doesn't support "new Set(iterable)", so we add the members of opRefs to newRefs one by one
+          opRefs.forEach(function(refName) {
+            newRefs.add(refName);
+          });
+
+          while (newRefs.size > 0) {
+            var prevRefs = newRefs;
+            newRefs = new Set();
+
+            prevRefs.forEach(function(refName) {
+              if (!allRefs.has(refName)) {
+                allRefs.add(refName);
+                var childRefs = definitionRefs[refName] || new Set();
+                childRefs.forEach(function(childRef) {
+                  newRefs.add(childRef);
+                });
+              }
+            });
+          }
+
+          allRefs.forEach(function(refName) {
+            var op = findOperation(doc, refName);
+            if (op) {
+              newDoc.definitions.push(op);
+            }
+          });
+
+          return newDoc;
+        }
+
+        module.exports = doc;
+
+        module.exports['CountryByContinentQuery'] = oneQuery(
+          doc,
+          'CountryByContinentQuery',
+        );
+
+        /***/
+      },
+
+    /***/ './src/graphql/fragments/country.gql':
+      /*!*******************************************!*\
+  !*** ./src/graphql/fragments/country.gql ***!
+  \*******************************************/
+      /*! no static exports found */
+      /***/ function(module, exports) {
+        var doc = {
+          kind: 'Document',
+          definitions: [
+            {
+              kind: 'FragmentDefinition',
+              name: {kind: 'Name', value: 'Country'},
+              typeCondition: {
+                kind: 'NamedType',
+                name: {kind: 'Name', value: 'Country'},
+              },
+              directives: [],
+              selectionSet: {
+                kind: 'SelectionSet',
+                selections: [
+                  {
+                    kind: 'Field',
+                    name: {kind: 'Name', value: 'code'},
+                    arguments: [],
+                    directives: [],
+                  },
+                  {
+                    kind: 'Field',
+                    name: {kind: 'Name', value: 'emoji'},
+                    arguments: [],
+                    directives: [],
+                  },
+                  {
+                    kind: 'Field',
+                    name: {kind: 'Name', value: 'capital'},
+                    arguments: [],
+                    directives: [],
+                  },
+                ],
+              },
+            },
+          ],
+          loc: {start: 0, end: 57},
+        };
+        doc.loc.source = {
+          body:
+            'fragment Country on Country {\n  code\n  emoji\n  capital\n}\n',
           name: 'GraphQL request',
           locationOffset: {line: 1, column: 1},
         };
@@ -1447,7 +1667,13 @@
           // it or the fragments it references
           var opRefs = definitionRefs[operationName] || new Set();
           var allRefs = new Set();
-          var newRefs = new Set(opRefs);
+          var newRefs = new Set();
+
+          // IE 11 doesn't support "new Set(iterable)", so we add the members of opRefs to newRefs one by one
+          opRefs.forEach(function(refName) {
+            newRefs.add(refName);
+          });
+
           while (newRefs.size > 0) {
             var prevRefs = newRefs;
             newRefs = new Set();
@@ -1475,10 +1701,7 @@
 
         module.exports = doc;
 
-        module.exports['UpdateStageMutation'] = oneQuery(
-          doc,
-          'UpdateStageMutation',
-        );
+        module.exports['Country'] = oneQuery(doc, 'Country');
 
         /***/
       },
@@ -1558,18 +1781,6 @@
                           selectionSet: {
                             kind: 'SelectionSet',
                             selections: [
-                              {
-                                kind: 'Field',
-                                name: {kind: 'Name', value: 'stage'},
-                                arguments: [],
-                                directives: [
-                                  {
-                                    kind: 'Directive',
-                                    name: {kind: 'Name', value: 'client'},
-                                    arguments: [],
-                                  },
-                                ],
-                              },
                               {
                                 kind: 'Field',
                                 name: {kind: 'Name', value: 'name'},
@@ -1691,11 +1902,11 @@
               },
             },
           ],
-          loc: {start: 0, end: 345},
+          loc: {start: 0, end: 326},
         };
         doc.loc.source = {
           body:
-            'query UsersQuery {\n  users @rest(type: "Users", path: "?nat=gb&results=5") {\n    results @type(name: "User") {\n      stage @client\n      name @type(name: "Name") {\n        title\n        first\n        last\n      }\n      login @type(name: "Login") {\n        uuid\n      }\n      picture @type(name: "Picture") {\n        thumbnail\n      }\n    }\n  }\n}',
+            'query UsersQuery {\n  users @rest(type: "Users", path: "?nat=gb&results=5") {\n    results @type(name: "User") {\n      name @type(name: "Name") {\n        title\n        first\n        last\n      }\n      login @type(name: "Login") {\n        uuid\n      }\n      picture @type(name: "Picture") {\n        thumbnail\n      }\n    }\n  }\n}\n',
           name: 'GraphQL request',
           locationOffset: {line: 1, column: 1},
         };
@@ -1778,7 +1989,13 @@
           // it or the fragments it references
           var opRefs = definitionRefs[operationName] || new Set();
           var allRefs = new Set();
-          var newRefs = new Set(opRefs);
+          var newRefs = new Set();
+
+          // IE 11 doesn't support "new Set(iterable)", so we add the members of opRefs to newRefs one by one
+          opRefs.forEach(function(refName) {
+            newRefs.add(refName);
+          });
+
           while (newRefs.size > 0) {
             var prevRefs = newRefs;
             newRefs = new Set();
@@ -1947,7 +2164,7 @@
         var _normalizeJss2 = _interopRequireDefault(_normalizeJss);
 
         var _reactJss = __webpack_require__(
-          /*! react-jss */ './node_modules/react-jss/lib/index.js',
+          /*! react-jss */ './node_modules/react-jss/dist/react-jss.esm.js',
         );
 
         var _reactJss2 = _interopRequireDefault(_reactJss);
@@ -1972,9 +2189,19 @@
       /*! no static exports found */
       /***/ function(module, exports, __webpack_require__) {
         module.exports = __webpack_require__(
-          /*! /home/typical/sites/poe_task/src/index.js */ './src/index.js',
+          /*! /Users/davydop/sites/graphql-example/src/index.js */ './src/index.js',
         );
 
+        /***/
+      },
+
+    /***/ 1:
+      /*!********************************!*\
+  !*** ./util.inspect (ignored) ***!
+  \********************************/
+      /*! no static exports found */
+      /***/ function(module, exports) {
+        /* (ignored) */
         /***/
       },
 

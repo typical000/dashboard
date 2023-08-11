@@ -1,8 +1,8 @@
 import React from 'react';
-import injectSheet from 'react-jss';
+import {createUseStyles} from 'react-jss';
 import {lighten} from 'polished';
 
-const styles = (theme) => ({
+const useStyles = createUseStyles((theme) => ({
   container: {
     padding: 20,
     borderRadius: theme.common.radius,
@@ -23,16 +23,19 @@ const styles = (theme) => ({
       display: 'none',
     },
   },
-});
+}));
 
-const ErrorNotice = ({classes, error}) => (
-  <div className={classes.container}>
-    <h2 className={classes.title}>Something went wrong</h2>
-    <p className={classes.text}>
-      Please, try again later. Maybe this will help you:
-    </p>
-    <p className={classes.text}>{error}</p>
-  </div>
-);
+const ErrorNotice = ({error}) => {
+  const css = useStyles();
+  return (
+    <div className={css.container}>
+      <h2 className={css.title}>Something went wrong</h2>
+      <p className={css.text}>
+        Please, try again later. Maybe this will help you:
+      </p>
+      <p className={css.text}>{JSON.stringify(error)}</p>
+    </div>
+  );
+};
 
-export default injectSheet(styles)(ErrorNotice);
+export default ErrorNotice;
