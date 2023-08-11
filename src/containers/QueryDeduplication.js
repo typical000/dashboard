@@ -7,7 +7,7 @@ const QueryDeduplication = () => {
 
   const handleDeduplicationClick = async () => {
     /**
-     * Illustation another way how we can consume GQL queries without
+     * Illustration of another way how we can consume GQL queries without
      * creating *.gql files. But, personally, I don't like this approach since:
      * - Instead of compiling queries in runtime they are executed
      * - Mixing everything in JS is not for me

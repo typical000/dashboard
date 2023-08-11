@@ -16,6 +16,7 @@ const EditExistingCountry = () => {
         onSubmit={(e) => {
           e.preventDefault();
           const fragment = {
+            // Because by default Apollo puts data in cache in a normalized way with keys like "[TYPE]:[ID]"
             id: `Country:${e.target.elements.code.value}`,
             fragment: COUNTRY_FRAGMENT,
           };
@@ -26,6 +27,7 @@ const EditExistingCountry = () => {
             console.error('No country found! :(');
           }
 
+          // Writing a fragment, you should preserve the same shape of data.
           client.writeFragment({
             ...fragment,
             data: {
